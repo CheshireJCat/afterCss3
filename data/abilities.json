@@ -1,0 +1,1946 @@
+[
+  {
+    "title": "语言架构、级联与复用",
+    "slug": "语言架构-级联与复用",
+    "items": [
+      {
+        "name": "Custom properties",
+        "slug": "custom-properties",
+        "syntax": "--brand: oklch(...); color: var(--brand);",
+        "summary": "原生变量、主题 token、跨组件继承。",
+        "status": "官方定义",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/--*",
+        "caniuse": "https://caniuse.com/?search=--brand",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "注册自定义属性",
+        "slug": "注册自定义属性",
+        "syntax": "@property --angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }",
+        "summary": "让自定义属性可动画、可类型检查、可设初始值。",
+        "status": "CSS Houdini / 广泛实现中",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@property",
+        "caniuse": "https://caniuse.com/?search=%40property",
+        "demo": "@property --angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }"
+      },
+      {
+        "name": "Cascade layers",
+        "slug": "cascade-layers",
+        "syntax": "@layer reset, base, components; @import url(...) layer(base);",
+        "summary": "把来源、框架、组件样式分层，减少 specificity 竞争。",
+        "status": "可靠候选 / Baseline 2022",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer",
+        "caniuse": "https://caniuse.com/?search=%40layer",
+        "demo": "@layer reset, base, components; @import url(...) layer(base);"
+      },
+      {
+        "name": "revert-layer",
+        "slug": "revert-layer",
+        "syntax": "color: revert-layer;",
+        "summary": "回滚当前 cascade layer 的声明，而不是回滚所有来源。",
+        "status": "Cascade Level 5",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/revert-layer",
+        "caniuse": "https://caniuse.com/?search=color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "@scope",
+        "slug": "at-scope",
+        "syntax": "@scope (.card) to (.card-footer) { ... }",
+        "summary": "原生局部作用域和 scoped proximity，减少全局选择器污染。",
+        "status": "Baseline 2025",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@scope",
+        "caniuse": "https://caniuse.com/?search=%40scope",
+        "demo": "@scope (.card) to (.card-footer) { ... }"
+      },
+      {
+        "name": "CSS Nesting",
+        "slug": "css-nesting",
+        "syntax": ".card { & h2 { ... } @media (...) { ... } }",
+        "summary": "原生嵌套选择器和嵌套条件规则，替代预处理器的一部分能力。",
+        "status": "Snapshot 粗略互通",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting",
+        "caniuse": "https://caniuse.com/?search=%40media",
+        "demo": ".card { & h2 { ... } @media (...) { ... } }"
+      },
+      {
+        "name": "条件规则增强",
+        "slug": "条件规则增强",
+        "syntax": "@supports selector(:has(*)) { ... }",
+        "summary": "检测属性、值、选择器、字体技术、字体格式等支持。",
+        "status": "Conditional 3/4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40supports%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40supports",
+        "demo": ".stage:has(.target:hover) .target {\n  border-radius: 999px;\n}\n"
+      },
+      {
+        "name": "@when / @else",
+        "slug": "at-when-at-else",
+        "syntax": "@when media(width > 600px) and supports(display: grid) { ... } @else { ... }",
+        "summary": "把 media/supports/container 等条件组合成原生条件链。",
+        "status": "草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40when%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40when",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "CSS if()",
+        "slug": "css-if",
+        "syntax": "width: if(media(width > 60rem): 50%; else: 100%);",
+        "summary": "在属性值内部写条件，配合 media()/supports()/style()。",
+        "status": "Values/Conditional 草案，部分实现",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=CSS%20if%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=width",
+        "demo": ".target {\n  /* width: if(media(width > 60rem): 50%; else: 100%); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "自定义函数",
+        "slug": "自定义函数",
+        "syntax": "@function --space(--n) { result: calc(var(--n) * 4px); }",
+        "summary": "原生参数化 value 函数，减少 Sass/工具链依赖。",
+        "status": "Functions and Mixins 草案，部分实现",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40function%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40function",
+        "demo": "@function --space(--n) { result: calc(var(--n) * 4px); }"
+      },
+      {
+        "name": "Mixins / @apply",
+        "slug": "mixins-at-apply",
+        "syntax": "@mixin --center { display: grid; place-items: center; } .x { @apply --center; }",
+        "summary": "原生可参数化声明块复用。",
+        "status": "草案，浏览器支持很少",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40mixin%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40mixin",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "CSSOM / Typed OM",
+        "slug": "cssom-typed-om",
+        "syntax": "element.attributeStyleMap.set('width', CSS.px(10));",
+        "summary": "以结构化 API 操作 CSS 值，减少字符串拼接。",
+        "status": "CSSOM / Houdini",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=CSSOM%20%2F%20Typed%20OM%20CSS",
+        "caniuse": "https://caniuse.com/?search=CSSOM%20%2F%20Typed%20OM",
+        "demo": ".target {\n  /* element.attributeStyleMap.set('width', CSS.px(10)); */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "选择器、伪类与伪元素",
+    "slug": "选择器-伪类与伪元素",
+    "items": [
+      {
+        "name": "函数式选择器",
+        "slug": "函数式选择器",
+        "syntax": ":is(), :where(), :has(), :not(.a, .b)",
+        "summary": "组合复杂条件、降低或控制 specificity、父/关系选择。",
+        "status": "Selectors 4 / Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Ais%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Ais%28%29",
+        "demo": ".stage:has(.target:hover) .target {\n  border-radius: 999px;\n}\n"
+      },
+      {
+        "name": "相对选择器",
+        "slug": "相对选择器",
+        "syntax": ":has(> img), :has(+ .error)",
+        "summary": "基于子元素、后续兄弟、关系链选择当前元素。",
+        "status": "Selectors 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Ahas%28%3E%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Ahas",
+        "demo": ".stage:has(.target:hover) .target {\n  border-radius: 999px;\n}\n"
+      },
+      {
+        "name": "增强 nth-child",
+        "slug": "增强-nth-child",
+        "syntax": ":nth-child(2n of .item), :nth-last-child(odd of :not([hidden]))",
+        "summary": "按子集计算结构位置。",
+        "status": "Selectors 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Anth-child%282n%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Anth-child",
+        "demo": ":nth-child(2n of .item), :nth-last-child(odd of :not([hidden]))"
+      },
+      {
+        "name": "焦点与可访问状态",
+        "slug": "焦点与可访问状态",
+        "syntax": ":focus-visible, :focus-within",
+        "summary": "键盘焦点可视化、父容器焦点联动。",
+        "status": "Selectors 4 / 广泛实现",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Afocus-visible%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Afocus-visible",
+        "demo": ":focus-visible, :focus-within"
+      },
+      {
+        "name": "组件/元素状态",
+        "slug": "组件-元素状态",
+        "syntax": ":defined, :dir(), :any-link, :local-link",
+        "summary": "自定义元素定义状态、方向性、链接状态等。",
+        "status": "Selectors 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Adefined%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Adefined",
+        "demo": ":defined, :dir(), :any-link, :local-link"
+      },
+      {
+        "name": "表单状态",
+        "slug": "表单状态",
+        "syntax": ":placeholder-shown, :default, :valid, :invalid, :in-range, :out-of-range, :required, :optional, :user-valid, :user-invalid",
+        "summary": "用 CSS 响应输入合法性和默认/必填/用户交互状态。",
+        "status": "Selectors 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Aplaceholder-shown%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Aplaceholder-shown",
+        "demo": ":placeholder-shown, :default, :valid, :invalid, :in-range, :out-of-range, :required, :optional, :user-valid, :user-invalid"
+      },
+      {
+        "name": "弹层与顶层状态",
+        "slug": "弹层与顶层状态",
+        "syntax": ":open, :modal, :popover-open, :fullscreen",
+        "summary": "选择 details/dialog/popover/fullscreen 等开放或顶层状态。",
+        "status": "Selectors 4/HTML 集成",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Aopen%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Aopen",
+        "demo": ":open, :modal, :popover-open, :fullscreen"
+      },
+      {
+        "name": "Shadow DOM 选择",
+        "slug": "shadow-dom-选择",
+        "syntax": ":host, :host(), :host-context(), ::slotted(), ::part()",
+        "summary": "Web Components 内外部样式边界和可暴露部件。",
+        "status": "CSS Scoping / Shadow Parts",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Ahost%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Ahost",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "自定义状态",
+        "slug": "自定义状态",
+        "syntax": ":state(--checked)",
+        "summary": "自定义元素通过 ElementInternals 暴露状态给 CSS。",
+        "status": "CSS Custom States",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Astate%28--checked%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Astate",
+        "demo": ":state(--checked)"
+      },
+      {
+        "name": "视图过渡状态",
+        "slug": "视图过渡状态",
+        "syntax": ":active-view-transition, :active-view-transition-type(name)",
+        "summary": "在 View Transition 期间选择根或过渡类型。",
+        "status": "View Transitions 2 / Baseline 2026 部分",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3Aactive-view-transition%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Aactive-view-transition",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "列选择器",
+        "slug": "列选择器",
+        "syntax": "E || F, :nth-col(), :nth-last-col()",
+        "summary": "针对表格列关系和列序号选择。",
+        "status": "Selectors 4 草案/支持有限",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%88%97%E9%80%89%E6%8B%A9%E5%99%A8%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3Anth-col%28%29",
+        "demo": ".target {\n  /* E || F, :nth-col(), :nth-last-col() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "现代伪元素",
+        "slug": "现代伪元素",
+        "syntax": "::marker, ::placeholder, ::file-selector-button, ::selection, ::target-text, ::highlight(name), ::backdrop, ::details-content",
+        "summary": "列表标记、占位符、文件按钮、选区、高亮、顶层背景等可样式化。",
+        "status": "Pseudo 4 / Forms / Highlight",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Amarker%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Amarker",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "View Transition 伪元素",
+        "slug": "view-transition-伪元素",
+        "syntax": "::view-transition, ::view-transition-group(), ::view-transition-image-pair(), ::view-transition-old(), ::view-transition-new()",
+        "summary": "定义页面状态变化的捕获图层和动画。",
+        "status": "View Transitions 1/2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Aview-transition%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Aview-transition",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "原生滚动控件伪元素",
+        "slug": "原生滚动控件伪元素",
+        "syntax": "::scroll-button(), ::scroll-marker, ::scroll-marker-group",
+        "summary": "CSS-only 轮播/分页指示与滚动按钮。",
+        "status": "Overflow 5 草案/实现推进中",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Ascroll-button%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Ascroll-button%28%29",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "原生表单部件伪元素",
+        "slug": "原生表单部件伪元素",
+        "syntax": "::picker(), ::picker-icon, ::checkmark, ::thumb, ::track, ::fill, ::field-text, ::field-component, ::field-separator",
+        "summary": "更细粒度地样式化 select、checkbox、range、date/time 等控件。",
+        "status": "CSS Forms 1 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Apicker%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Apicker%28%29",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "条件查询、容器查询与环境感知",
+    "slug": "条件查询-容器查询与环境感知",
+    "items": [
+      {
+        "name": "Media Queries 4 范围语法",
+        "slug": "media-queries-4-范围语法",
+        "syntax": "@media (40rem <= width < 80rem) { ... }",
+        "summary": "更接近数学表达的断点写法。",
+        "status": "可靠候选",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40media%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40media",
+        "demo": "@media (40rem <= width < 80rem) { ... }"
+      },
+      {
+        "name": "输入能力查询",
+        "slug": "输入能力查询",
+        "syntax": "hover, pointer, any-hover, any-pointer",
+        "summary": "根据鼠标/触控/笔等交互能力调整 UI。",
+        "status": "Media Queries 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E8%BE%93%E5%85%A5%E8%83%BD%E5%8A%9B%E6%9F%A5%E8%AF%A2%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E8%BE%93%E5%85%A5%E8%83%BD%E5%8A%9B%E6%9F%A5%E8%AF%A2",
+        "demo": ".target {\n  /* hover, pointer, any-hover, any-pointer */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "显示与偏好查询",
+        "slug": "显示与偏好查询",
+        "syntax": "prefers-color-scheme, prefers-reduced-motion, prefers-contrast, prefers-reduced-transparency, forced-colors, inverted-colors",
+        "summary": "响应用户系统偏好和无障碍设置。",
+        "status": "Media Queries 5 / Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E6%98%BE%E7%A4%BA%E4%B8%8E%E5%81%8F%E5%A5%BD%E6%9F%A5%E8%AF%A2%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E6%98%BE%E7%A4%BA%E4%B8%8E%E5%81%8F%E5%A5%BD%E6%9F%A5%E8%AF%A2",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "色彩与动态范围查询",
+        "slug": "色彩与动态范围查询",
+        "syntax": "color-gamut, dynamic-range, video-dynamic-range",
+        "summary": "针对 P3/HDR/视频动态范围做渐进增强。",
+        "status": "Media Queries 5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E8%89%B2%E5%BD%A9%E4%B8%8E%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E8%89%B2%E5%BD%A9%E4%B8%8E%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4%E6%9F%A5%E8%AF%A2",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "运行环境查询",
+        "slug": "运行环境查询",
+        "syntax": "scripting, update, overflow-block, overflow-inline, display-mode",
+        "summary": "判断脚本、刷新能力、溢出方式、PWA 显示模式等。",
+        "status": "Media Queries 5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E6%9F%A5%E8%AF%A2%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E6%9F%A5%E8%AF%A2",
+        "demo": ".target {\n  /* scripting, update, overflow-block, overflow-inline, display-mode */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Container size queries",
+        "slug": "container-size-queries",
+        "syntax": "@container card (inline-size > 40rem) { ... }",
+        "summary": "基于组件容器尺寸而不是视口响应。",
+        "status": "Contain/Conditional 3+ / Baseline",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries",
+        "caniuse": "https://caniuse.com/?search=%40container",
+        "demo": ".stage { container-type: inline-size; }\n@container (width > 360px) {\n  .target { width: 220px; }\n}\n"
+      },
+      {
+        "name": "Container style queries",
+        "slug": "container-style-queries",
+        "syntax": "@container style(--theme: dark) { ... }",
+        "summary": "根据容器已计算样式或 custom property 分支。",
+        "status": "Baseline 2026",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_size_and_style_queries",
+        "caniuse": "https://caniuse.com/?search=%40container",
+        "demo": ".stage { container-type: inline-size; }\n@container (width > 360px) {\n  .target { width: 220px; }\n}\n"
+      },
+      {
+        "name": "Container scroll-state queries",
+        "slug": "container-scroll-state-queries",
+        "syntax": "@container scroll-state(stuck: top) { ... }",
+        "summary": "根据 sticky/snapped/scrollable 等滚动状态响应。",
+        "status": "Conditional 5 / 实现推进中",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40container%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40container",
+        "demo": ".stage { container-type: inline-size; }\n@container (width > 360px) {\n  .target { width: 220px; }\n}\n"
+      },
+      {
+        "name": "容器单位",
+        "slug": "容器单位",
+        "syntax": "cqw, cqh, cqi, cqb, cqmin, cqmax",
+        "summary": "直接以查询容器尺寸计算值。",
+        "status": "Contain/Values",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries#container_query_length_units",
+        "caniuse": "https://caniuse.com/?search=%E5%AE%B9%E5%99%A8%E5%8D%95%E4%BD%8D",
+        "demo": ".target {\n  /* cqw, cqh, cqi, cqb, cqmin, cqmax */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "特性查询函数",
+        "slug": "特性查询函数",
+        "syntax": "selector(), supports(), font-tech(), font-format()",
+        "summary": "检测选择器、声明、字体技术或格式。",
+        "status": "Conditional 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=selector%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=selector%28%29",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "环境变量",
+        "slug": "环境变量",
+        "syntax": "env(safe-area-inset-top), env(viewport-segment-width 0 0)",
+        "summary": "适配刘海屏、折叠屏分段视口、虚拟键盘、标题栏等。",
+        "status": "CSS Env 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F",
+        "demo": ".target {\n  /* env(safe-area-inset-top), env(viewport-segment-width 0 0) */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "自定义媒体查询",
+        "slug": "自定义媒体查询",
+        "syntax": "@custom-media --narrow (width < 40rem);",
+        "summary": "把常用媒体条件命名复用。",
+        "status": "Media Queries 5 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40custom-media%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40custom-media",
+        "demo": "@custom-media --narrow (width < 40rem);"
+      },
+      {
+        "name": "Anchor/position fallback 查询",
+        "slug": "anchor-position-fallback-查询",
+        "syntax": "@container anchored(...) 或 fallback 相关查询",
+        "summary": "根据 anchor positioning 选择结果调整样式。",
+        "status": "Conditional/Anchor 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40container%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40container",
+        "demo": ".stage { container-type: inline-size; }\n@container (width > 360px) {\n  .target { width: 220px; }\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "布局、定位与阅读顺序",
+    "slug": "布局-定位与阅读顺序",
+    "items": [
+      {
+        "name": "Grid layout",
+        "slug": "grid-layout",
+        "syntax": "display: grid; grid-template-columns: repeat(auto-fit, minmax(...));",
+        "summary": "二维布局、命名区域、自动放置。",
+        "status": "可靠候选",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout",
+        "caniuse": "https://caniuse.com/?search=display",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "Subgrid",
+        "slug": "subgrid",
+        "syntax": "grid-template-columns: subgrid;",
+        "summary": "子网格继承父网格轨道，对齐深层内容。",
+        "status": "Grid Level 2",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout/Subgrid",
+        "caniuse": "https://caniuse.com/?search=grid-template-columns",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "Masonry / Grid Level 3",
+        "slug": "masonry-grid-level-3",
+        "syntax": "grid-template-rows: masonry;",
+        "summary": "瀑布流类布局进入标准草案。",
+        "status": "草案/支持有限",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Masonry%20%2F%20Grid%20Level%203%20CSS",
+        "caniuse": "https://caniuse.com/?search=grid-template-rows",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "Flexbox",
+        "slug": "flexbox",
+        "syntax": "display: flex; gap: 1rem;",
+        "summary": "一维弹性布局和空间分配。",
+        "status": "官方定义 / Current Work",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout",
+        "caniuse": "https://caniuse.com/?search=display",
+        "demo": ".stage { display: flex; justify-content: center; align-items: center; }\n"
+      },
+      {
+        "name": "Box Alignment",
+        "slug": "box-alignment",
+        "syntax": "place-items, place-content, align-self, justify-self, safe center",
+        "summary": "跨 flex/grid/block 的统一对齐模型。",
+        "status": "较稳定模块",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Box%20Alignment%20CSS",
+        "caniuse": "https://caniuse.com/?search=Box%20Alignment",
+        "demo": ".target {\n  /* place-items, place-content, align-self, justify-self, safe center */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "多关键字 display",
+        "slug": "多关键字-display",
+        "syntax": "display: inline flex; display: block flow-root; display: contents;",
+        "summary": "拆分 outer/inner display，表达更精确。",
+        "status": "Display 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%A4%9A%E5%85%B3%E9%94%AE%E5%AD%97%20display%20CSS",
+        "caniuse": "https://caniuse.com/?search=display",
+        "demo": ".stage { display: flex; justify-content: center; align-items: center; }\n"
+      },
+      {
+        "name": "Flow root",
+        "slug": "flow-root",
+        "syntax": "display: flow-root;",
+        "summary": "无需 clearfix 创建新的块格式化上下文。",
+        "status": "Display 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Flow%20root%20CSS",
+        "caniuse": "https://caniuse.com/?search=display",
+        "demo": ".target {\n  /* display: flow-root; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Logical properties",
+        "slug": "logical-properties",
+        "syntax": "margin-inline, padding-block, inset-inline-start, border-start-start-radius",
+        "summary": "按书写方向映射布局、边距、边框和尺寸。",
+        "status": "Snapshot 粗略互通",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Logical%20properties%20CSS",
+        "caniuse": "https://caniuse.com/?search=Logical%20properties",
+        "demo": ".target {\n  /* margin-inline, padding-block, inset-inline-start, border-start-start-radius */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Writing modes",
+        "slug": "writing-modes",
+        "syntax": "writing-mode: vertical-rl; text-orientation: mixed;",
+        "summary": "竖排、横竖混排、国际化排版。",
+        "status": "官方定义/Level 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Writing%20modes%20CSS",
+        "caniuse": "https://caniuse.com/?search=writing-mode",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "Containment",
+        "slug": "containment",
+        "syntax": "contain: layout paint; content-visibility: auto; contain-intrinsic-size: 0 500px;",
+        "summary": "隔离布局/样式/绘制，提高性能并支持容器查询。",
+        "status": "官方定义 + Level 2/3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Containment%20CSS",
+        "caniuse": "https://caniuse.com/?search=contain",
+        "demo": ".target {\n  /* contain: layout paint; content-visibility: auto; contain-intrinsic-size: 0 500px; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Anchor positioning",
+        "slug": "anchor-positioning",
+        "syntax": "position-anchor: --btn; top: anchor(bottom); position-area: bottom center;",
+        "summary": "无 JS 定位 tooltip、popover、菜单等依附浮层。",
+        "status": "Current Work 草案",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning",
+        "caniuse": "https://caniuse.com/?search=position-anchor",
+        "demo": ".target:first-child { anchor-name: --demo; }\n.target + .target { position-anchor: --demo; }\n"
+      },
+      {
+        "name": "Fallback positioning",
+        "slug": "fallback-positioning",
+        "syntax": "@position-try --flip { position-area: top; } position-try: --flip;",
+        "summary": "浮层碰撞时自动翻转/改位。",
+        "status": "Anchor Positioning",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40position-try%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40position-try",
+        "demo": "@position-try --flip { position-area: top; } position-try: --flip;"
+      },
+      {
+        "name": "Reading flow/order",
+        "slug": "reading-flow-order",
+        "syntax": "reading-flow: grid-rows; reading-order: 2;",
+        "summary": "让辅助技术和 Tab 顺序跟随视觉布局。",
+        "status": "Display 4 / 实现推进中",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Reading%20flow%2Forder%20CSS",
+        "caniuse": "https://caniuse.com/?search=reading-flow",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "Shapes and exclusions",
+        "slug": "shapes-and-exclusions",
+        "syntax": "shape-outside: circle(); shape-margin: 1rem;",
+        "summary": "非矩形文字环绕、复杂浮动区域。",
+        "status": "Shapes 1/2、Exclusions 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Shapes%20and%20exclusions%20CSS",
+        "caniuse": "https://caniuse.com/?search=shape-outside",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "Multicol and fragmentation",
+        "slug": "multicol-and-fragmentation",
+        "syntax": "column-count, column-span, break-inside, box-decoration-break",
+        "summary": "多列排版和跨页/跨列断点控制。",
+        "status": "官方定义/较稳定",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Multicol%20and%20fragmentation%20CSS",
+        "caniuse": "https://caniuse.com/?search=Multicol%20and%20fragmentation",
+        "demo": ".target {\n  /* column-count, column-span, break-inside, box-decoration-break */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Ruby layout",
+        "slug": "ruby-layout",
+        "syntax": "ruby-position, ruby-align, ruby-overhang",
+        "summary": "东亚注音/旁注排版。",
+        "status": "Ruby 1 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Ruby%20layout%20CSS",
+        "caniuse": "https://caniuse.com/?search=Ruby%20layout",
+        "demo": ".target {\n  /* ruby-position, ruby-align, ruby-overhang */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "尺寸、单位、数学和值函数",
+    "slug": "尺寸-单位-数学和值函数",
+    "items": [
+      {
+        "name": "Intrinsic sizing",
+        "slug": "intrinsic-sizing",
+        "syntax": "min-content, max-content, fit-content(), stretch, contain",
+        "summary": "基于内容自然尺寸和约束计算宽高。",
+        "status": "Snapshot 预 CR 可发布/Values",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Intrinsic%20sizing%20CSS",
+        "caniuse": "https://caniuse.com/?search=fit-content%28%29",
+        "demo": ".target {\n  /* min-content, max-content, fit-content(), stretch, contain */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "aspect-ratio",
+        "slug": "aspect-ratio",
+        "syntax": "aspect-ratio: 16 / 9;",
+        "summary": "用比例参与布局，不必 padding hack。",
+        "status": "Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio",
+        "caniuse": "https://caniuse.com/?search=aspect-ratio",
+        "demo": ".target {\n  /* aspect-ratio: 16 / 9; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "比较函数",
+        "slug": "比较函数",
+        "syntax": "min(), max(), clamp()",
+        "summary": "流式排版、响应式尺寸、边界控制。",
+        "status": "Values 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=min%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=min%28%29",
+        "demo": ".target {\n  /* min(), max(), clamp() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "进阶数学函数",
+        "slug": "进阶数学函数",
+        "syntax": "round(), mod(), rem(), sin(), cos(), tan(), asin(), acos(), atan(), atan2(), pow(), sqrt(), hypot(), log(), exp(), abs(), sign()",
+        "summary": "原生网格计算、三角布局、指数/取整/符号判断。",
+        "status": "Values 4 / Baseline 多项",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=round%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=round%28%29",
+        "demo": ".target {\n  /* round(), mod(), rem(), sin(), cos(), tan(), asin(), acos(), atan(), atan2(), pow(), sqrt(), hypot(), log(), exp(), abs(), sign() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "数学常量",
+        "slug": "数学常量",
+        "syntax": "pi, e, infinity, -infinity, NaN",
+        "summary": "在 calc 表达式中表示标准数学常量。",
+        "status": "Values 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E6%95%B0%E5%AD%A6%E5%B8%B8%E9%87%8F%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E6%95%B0%E5%AD%A6%E5%B8%B8%E9%87%8F",
+        "demo": ".target {\n  /* pi, e, infinity, -infinity, NaN */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "动态视口单位",
+        "slug": "动态视口单位",
+        "syntax": "svh, lvh, dvh, svi, lvi, dvi, svb, lvb, dvb, dvmin, dvmax",
+        "summary": "解决移动端地址栏变化导致的 100vh 问题。",
+        "status": "Values 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%8A%A8%E6%80%81%E8%A7%86%E5%8F%A3%E5%8D%95%E4%BD%8D%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%8A%A8%E6%80%81%E8%A7%86%E5%8F%A3%E5%8D%95%E4%BD%8D",
+        "demo": ".target {\n  /* svh, lvh, dvh, svi, lvi, dvi, svb, lvb, dvb, dvmin, dvmax */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "逻辑视口单位",
+        "slug": "逻辑视口单位",
+        "syntax": "vi, vb",
+        "summary": "按 inline/block 轴定义视口单位。",
+        "status": "Values 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E9%80%BB%E8%BE%91%E8%A7%86%E5%8F%A3%E5%8D%95%E4%BD%8D%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E9%80%BB%E8%BE%91%E8%A7%86%E5%8F%A3%E5%8D%95%E4%BD%8D",
+        "demo": ".target {\n  /* vi, vb */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "字体相关单位",
+        "slug": "字体相关单位",
+        "syntax": "cap, ic, lh, rlh, rcap, rch, rex, ric",
+        "summary": "用字帽高、汉字水平方块、行高、根字体指标参与布局。",
+        "status": "Values 4/5，部分 Baseline 2026",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%AD%97%E4%BD%93%E7%9B%B8%E5%85%B3%E5%8D%95%E4%BD%8D%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%AD%97%E4%BD%93%E7%9B%B8%E5%85%B3%E5%8D%95%E4%BD%8D",
+        "demo": ".target {\n  /* cap, ic, lh, rlh, rcap, rch, rex, ric */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "interpolate-size",
+        "slug": "interpolate-size",
+        "syntax": "interpolate-size: allow-keywords;",
+        "summary": "允许 auto、min-content 等 intrinsic size 参与动画插值。",
+        "status": "Values/Box Sizing",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=interpolate-size%20CSS",
+        "caniuse": "https://caniuse.com/?search=interpolate-size",
+        "demo": ".target {\n  /* interpolate-size: allow-keywords; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "calc-size()",
+        "slug": "calc-size",
+        "syntax": "height: calc-size(auto, size + 2rem);",
+        "summary": "对 intrinsic size 做计算并参与动画。",
+        "status": "Values 5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=calc-size%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=height",
+        "demo": ".target {\n  /* height: calc-size(auto, size + 2rem); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "typed attr()",
+        "slug": "typed-attr",
+        "syntax": "width: attr(data-columns type(<integer>)) * 1rem;",
+        "summary": "从 HTML 属性读取 typed value，用于 content 以外属性。",
+        "status": "Values 5 / 部分实现",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=typed%20attr%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=width",
+        "demo": ".target {\n  /* width: attr(data-columns type(<integer>)) * 1rem; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "树计数函数",
+        "slug": "树计数函数",
+        "syntax": "sibling-index(), sibling-count()",
+        "summary": "按兄弟序号/总数做 stagger、布局公式、颜色分布。",
+        "status": "Values 5 / 实现推进中",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=sibling-index%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=sibling-index%28%29",
+        "demo": ".target {\n  /* sibling-index(), sibling-count() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "随机与选择函数",
+        "slug": "随机与选择函数",
+        "syntax": "random(), random-item()",
+        "summary": "原生随机数或随机项，避免预生成 class。",
+        "status": "Values 5 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=random%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=random%28%29",
+        "demo": ".target {\n  /* random(), random-item() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "fallback/条件值函数",
+        "slug": "fallback-条件值函数",
+        "syntax": "first-valid(), toggle(), progress(), calc-mix()",
+        "summary": "值级 fallback、状态切换、进度归一化、数值混合。",
+        "status": "Values 5 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=first-valid%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=first-valid%28%29",
+        "demo": ".target {\n  /* first-valid(), toggle(), progress(), calc-mix() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "URL 请求修饰",
+        "slug": "url-请求修饰",
+        "syntax": "url(... integrity(...)), src()",
+        "summary": "为 CSS 资源请求表达完整性等元信息。",
+        "status": "Values 5 / Snapshot 预 CR 例外",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=URL%20%E8%AF%B7%E6%B1%82%E4%BF%AE%E9%A5%B0%20CSS",
+        "caniuse": "https://caniuse.com/?search=src%28%29",
+        "demo": ".target {\n  /* url(... integrity(...)), src() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "anchor-size()",
+        "slug": "anchor-size",
+        "syntax": "inline-size: anchor-size(width);",
+        "summary": "取被锚定元素尺寸参与布局。",
+        "status": "Anchor Positioning",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=anchor-size%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=inline-size",
+        "demo": ".target:first-child { anchor-name: --demo; }\n.target + .target { position-anchor: --demo; }\n"
+      },
+      {
+        "name": "field-sizing",
+        "slug": "field-sizing",
+        "syntax": "field-sizing: content;",
+        "summary": "input/textarea 根据内容自适应尺寸。",
+        "status": "CSS UI/Forms",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=field-sizing%20CSS",
+        "caniuse": "https://caniuse.com/?search=field-sizing",
+        "demo": ".target {\n  /* field-sizing: content; */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "颜色、主题与高动态范围",
+    "slug": "颜色-主题与高动态范围",
+    "items": [
+      {
+        "name": "现代 rgb/hsl 语法",
+        "slug": "现代-rgb-hsl-语法",
+        "syntax": "rgb(255 0 0 / 50%), hsl(120 80% 40% / .8)",
+        "summary": "空格分隔、斜杠 alpha，统一颜色函数语法。",
+        "status": "Color 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E7%8E%B0%E4%BB%A3%20rgb%2Fhsl%20%E8%AF%AD%E6%B3%95%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E7%8E%B0%E4%BB%A3%20rgb%2Fhsl%20%E8%AF%AD%E6%B3%95",
+        "demo": ".target {\n  /* rgb(255 0 0 / 50%), hsl(120 80% 40% / .8) */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "HWB",
+        "slug": "hwb",
+        "syntax": "hwb(200 10% 20%)",
+        "summary": "按 hue/white/black 表达颜色。",
+        "status": "Color 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=HWB%20CSS",
+        "caniuse": "https://caniuse.com/?search=HWB",
+        "demo": ".target {\n  /* hwb(200 10% 20%) */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Lab/LCH/OKLab/OKLCH",
+        "slug": "lab-lch-oklab-oklch",
+        "syntax": "oklch(70% 0.16 250)",
+        "summary": "感知均匀颜色空间，适合设计系统和渐变。",
+        "status": "Color 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Lab%2FLCH%2FOKLab%2FOKLCH%20CSS",
+        "caniuse": "https://caniuse.com/?search=Lab%2FLCH%2FOKLab%2FOKLCH",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "wide-gamut color()",
+        "slug": "wide-gamut-color",
+        "syntax": "color(display-p3 1 0.2 0), color(rec2020 ...)",
+        "summary": "Display-P3、Rec.2020、A98、ProPhoto、XYZ 等广色域。",
+        "status": "Color 4 / Snapshot 2026 官方定义",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=wide-gamut%20color%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=wide-gamut%20color%28%29",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "color-mix()",
+        "slug": "color-mix",
+        "syntax": "color-mix(in oklch, var(--brand) 70%, white)",
+        "summary": "在指定颜色空间混色。",
+        "status": "Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix",
+        "caniuse": "https://caniuse.com/?search=color-mix%28%29",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "相对颜色语法",
+        "slug": "相对颜色语法",
+        "syntax": "oklch(from var(--brand) l c calc(h + 30))",
+        "summary": "从已有颜色提取通道并派生新颜色。",
+        "status": "Color 5 / Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E7%9B%B8%E5%AF%B9%E9%A2%9C%E8%89%B2%E8%AF%AD%E6%B3%95%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E7%9B%B8%E5%AF%B9%E9%A2%9C%E8%89%B2%E8%AF%AD%E6%B3%95",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "light-dark()",
+        "slug": "light-dark",
+        "syntax": "color: light-dark(#111, #eee);",
+        "summary": "与 color-scheme 协作的明暗主题值选择。",
+        "status": "Color 5",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark",
+        "caniuse": "https://caniuse.com/?search=color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "contrast-color()",
+        "slug": "contrast-color",
+        "syntax": "color: contrast-color(var(--bg));",
+        "summary": "根据背景选择可读前景色。",
+        "status": "Color 6 / Baseline 2026",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/contrast-color",
+        "caniuse": "https://caniuse.com/?search=color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "color-contrast()",
+        "slug": "color-contrast",
+        "syntax": "color-contrast(var(--bg) vs white, black);",
+        "summary": "从候选颜色中选满足对比度的颜色。",
+        "status": "Color 5/6 演进中",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=color-contrast%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=color-contrast%28%29",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "颜色插值方法",
+        "slug": "颜色插值方法",
+        "syntax": "linear-gradient(in oklab, red, blue)",
+        "summary": "控制渐变和动画使用的颜色空间和 hue 插值。",
+        "status": "Images 4 + Color 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E9%A2%9C%E8%89%B2%E6%8F%92%E5%80%BC%E6%96%B9%E6%B3%95%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E9%A2%9C%E8%89%B2%E6%8F%92%E5%80%BC%E6%96%B9%E6%B3%95",
+        "demo": ".target {\n  /* linear-gradient(in oklab, red, blue) */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "color-scheme",
+        "slug": "color-scheme",
+        "syntax": "color-scheme: light dark;",
+        "summary": "让 UA 控件、滚动条、表单跟随主题。",
+        "status": "Color Adjustment 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=color-scheme%20CSS",
+        "caniuse": "https://caniuse.com/?search=color-scheme",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "forced colors",
+        "slug": "forced-colors",
+        "syntax": "forced-color-adjust, Canvas, CanvasText",
+        "summary": "高对比/强制颜色模式适配。",
+        "status": "Color Adjustment 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=forced%20colors%20CSS",
+        "caniuse": "https://caniuse.com/?search=forced%20colors",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "accent-color",
+        "slug": "accent-color",
+        "syntax": "accent-color: var(--brand);",
+        "summary": "原生 checkbox/radio/range/progress 等强调色。",
+        "status": "CSS UI 4 / Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color",
+        "caniuse": "https://caniuse.com/?search=accent-color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "print-color-adjust",
+        "slug": "print-color-adjust",
+        "syntax": "print-color-adjust: exact;",
+        "summary": "控制打印或节省墨水时的颜色调整。",
+        "status": "Color Adjustment 1 / Baseline 2025",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=print-color-adjust%20CSS",
+        "caniuse": "https://caniuse.com/?search=print-color-adjust",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "HDR color",
+        "slug": "hdr-color",
+        "syntax": "dynamic-range-limit, HDR color spaces",
+        "summary": "面向高动态范围显示的颜色输出控制。",
+        "status": "Color HDR 1 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=HDR%20color%20CSS",
+        "caniuse": "https://caniuse.com/?search=HDR%20color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "字体、文字与排版",
+    "slug": "字体-文字与排版",
+    "items": [
+      {
+        "name": "Variable fonts",
+        "slug": "variable-fonts",
+        "syntax": "font-variation-settings, font-optical-sizing, @font-face tech(variations)",
+        "summary": "可变轴、光学尺寸、字体技术声明。",
+        "status": "Fonts 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Variable%20fonts%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40font-face",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "字体加载控制",
+        "slug": "字体加载控制",
+        "syntax": "font-display, FontFaceSet API",
+        "summary": "控制 web font 加载时机、fallback 和动态加载。",
+        "status": "Fonts 3 / Font Loading",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%AD%97%E4%BD%93%E5%8A%A0%E8%BD%BD%E6%8E%A7%E5%88%B6%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%AD%97%E4%BD%93%E5%8A%A0%E8%BD%BD%E6%8E%A7%E5%88%B6",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "字体指标覆盖",
+        "slug": "字体指标覆盖",
+        "syntax": "size-adjust, ascent-override, descent-override, line-gap-override",
+        "summary": "减少字体替换导致的 CLS 和排版跳动。",
+        "status": "Fonts 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%AD%97%E4%BD%93%E6%8C%87%E6%A0%87%E8%A6%86%E7%9B%96%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%AD%97%E4%BD%93%E6%8C%87%E6%A0%87%E8%A6%86%E7%9B%96",
+        "demo": ".target {\n  /* size-adjust, ascent-override, descent-override, line-gap-override */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "字体调色板",
+        "slug": "字体调色板",
+        "syntax": "font-palette, @font-palette-values",
+        "summary": "彩色字体调色和主题化。",
+        "status": "Fonts 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%AD%97%E4%BD%93%E8%B0%83%E8%89%B2%E6%9D%BF%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40font-palette-values",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "OpenType 控制",
+        "slug": "opentype-控制",
+        "syntax": "font-feature-settings, font-variant-*, font-kerning, font-language-override",
+        "summary": "连字、数字、东亚排版、特性开关。",
+        "status": "Fonts 3/4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=OpenType%20%E6%8E%A7%E5%88%B6%20CSS",
+        "caniuse": "https://caniuse.com/?search=OpenType%20%E6%8E%A7%E5%88%B6",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "字体合成控制",
+        "slug": "字体合成控制",
+        "syntax": "font-synthesis, font-synthesis-weight/style/small-caps/position",
+        "summary": "控制浏览器是否合成粗体、斜体、小型大写等。",
+        "status": "Fonts 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%AD%97%E4%BD%93%E5%90%88%E6%88%90%E6%8E%A7%E5%88%B6%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%AD%97%E4%BD%93%E5%90%88%E6%88%90%E6%8E%A7%E5%88%B6",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "text-wrap",
+        "slug": "text-wrap",
+        "syntax": "text-wrap: balance | pretty | stable",
+        "summary": "标题平衡换行、正文更优换行。",
+        "status": "Text 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=text-wrap%20CSS",
+        "caniuse": "https://caniuse.com/?search=text-wrap",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "white-space 分解",
+        "slug": "white-space-分解",
+        "syntax": "white-space-collapse, text-wrap-mode, text-wrap-style",
+        "summary": "把 white-space 的折叠与换行行为拆开控制。",
+        "status": "Text 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=white-space%20%E5%88%86%E8%A7%A3%20CSS",
+        "caniuse": "https://caniuse.com/?search=white-space%20%E5%88%86%E8%A7%A3",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "断词与连字符增强",
+        "slug": "断词与连字符增强",
+        "syntax": "hyphenate-character, hyphenate-limit-*, overflow-wrap:anywhere, word-break:auto-phrase",
+        "summary": "更细控制断词、连字符和自然语言换行。",
+        "status": "Text 3/4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E6%96%AD%E8%AF%8D%E4%B8%8E%E8%BF%9E%E5%AD%97%E7%AC%A6%E5%A2%9E%E5%BC%BA%20CSS",
+        "caniuse": "https://caniuse.com/?search=overflow-wrap",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "文本装饰增强",
+        "slug": "文本装饰增强",
+        "syntax": "text-decoration-thickness, text-underline-offset, text-underline-position: from-font, text-decoration-skip-ink: all",
+        "summary": "下划线厚度、偏移、跳墨和字体推荐位置。",
+        "status": "Text Decoration 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E6%96%87%E6%9C%AC%E8%A3%85%E9%A5%B0%E5%A2%9E%E5%BC%BA%20CSS",
+        "caniuse": "https://caniuse.com/?search=text-underline-position",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "强调与特殊装饰",
+        "slug": "强调与特殊装饰",
+        "syntax": "text-emphasis, spelling-error, grammar-error decorations",
+        "summary": "东亚着重号、拼写/语法错误装饰。",
+        "status": "Text Decoration 3/4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%BC%BA%E8%B0%83%E4%B8%8E%E7%89%B9%E6%AE%8A%E8%A3%85%E9%A5%B0%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%BC%BA%E8%B0%83%E4%B8%8E%E7%89%B9%E6%AE%8A%E8%A3%85%E9%A5%B0",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "text-box trimming",
+        "slug": "text-box-trimming",
+        "syntax": "text-box-trim, text-box-edge, text-box",
+        "summary": "去除字体盒多余 leading，实现更精确垂直对齐。",
+        "status": "Inline 3 / Snapshot 预 CR 可发布",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=text-box%20trimming%20CSS",
+        "caniuse": "https://caniuse.com/?search=text-box%20trimming",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "首字下沉",
+        "slug": "首字下沉",
+        "syntax": "initial-letter, initial-letter-align",
+        "summary": "报刊式首字下沉和首字对齐。",
+        "status": "Inline/Layout 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E9%A6%96%E5%AD%97%E4%B8%8B%E6%B2%89%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E9%A6%96%E5%AD%97%E4%B8%8B%E6%B2%89",
+        "demo": ".target {\n  /* initial-letter, initial-letter-align */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "基线与行网格",
+        "slug": "基线与行网格",
+        "syntax": "baseline-shift, dominant-baseline, line-height-step, line-grid",
+        "summary": "跨脚本基线、节奏尺寸、行网格。",
+        "status": "Inline/Rhythm/Line Grid",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%9F%BA%E7%BA%BF%E4%B8%8E%E8%A1%8C%E7%BD%91%E6%A0%BC%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%9F%BA%E7%BA%BF%E4%B8%8E%E8%A1%8C%E7%BD%91%E6%A0%BC",
+        "demo": ".stage { display: grid; grid-template-columns: repeat(2, 1fr); }\n.target { width: auto; }\n"
+      },
+      {
+        "name": "间距与自动排版",
+        "slug": "间距与自动排版",
+        "syntax": "text-spacing-trim, text-autospace, word-space-transform",
+        "summary": "中日韩标点、拉丁/东亚混排空隙和字间处理。",
+        "status": "Text 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E9%97%B4%E8%B7%9D%E4%B8%8E%E8%87%AA%E5%8A%A8%E6%8E%92%E7%89%88%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E9%97%B4%E8%B7%9D%E4%B8%8E%E8%87%AA%E5%8A%A8%E6%8E%92%E7%89%88",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "Ruby annotation",
+        "slug": "ruby-annotation",
+        "syntax": "ruby-position, ruby-align, ruby-merge",
+        "summary": "日文/中文拼音、注音、旁注布局。",
+        "status": "Ruby 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Ruby%20annotation%20CSS",
+        "caniuse": "https://caniuse.com/?search=Ruby%20annotation",
+        "demo": ".target {\n  /* ruby-position, ruby-align, ruby-merge */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "text-indent 扩展",
+        "slug": "text-indent-扩展",
+        "syntax": "text-indent: 2em hanging each-line;",
+        "summary": "悬挂缩进和每行缩进。",
+        "status": "Text 3/4 / Baseline 2026",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=text-indent%20%E6%89%A9%E5%B1%95%20CSS",
+        "caniuse": "https://caniuse.com/?search=text-indent",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "line-clamp",
+        "slug": "line-clamp",
+        "syntax": "line-clamp, -webkit-line-clamp 标准化路径",
+        "summary": "多行截断和块省略。",
+        "status": "Overflow 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=line-clamp%20CSS",
+        "caniuse": "https://caniuse.com/?search=line-clamp",
+        "demo": ".target {\n  /* line-clamp, -webkit-line-clamp 标准化路径 */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "背景、边框、图像、遮罩与视觉效果",
+    "slug": "背景-边框-图像-遮罩与视觉效果",
+    "items": [
+      {
+        "name": "多背景与背景控制",
+        "slug": "多背景与背景控制",
+        "syntax": "background-size, background-origin, background-clip, multiple backgrounds",
+        "summary": "多个背景层、裁剪、定位和尺寸控制。",
+        "status": "Backgrounds 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E5%A4%9A%E8%83%8C%E6%99%AF%E4%B8%8E%E8%83%8C%E6%99%AF%E6%8E%A7%E5%88%B6%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E5%A4%9A%E8%83%8C%E6%99%AF%E4%B8%8E%E8%83%8C%E6%99%AF%E6%8E%A7%E5%88%B6",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "渐变族",
+        "slug": "渐变族",
+        "syntax": "linear-gradient, radial-gradient, conic-gradient, repeating-*",
+        "summary": "无需图片的线性/径向/锥形渐变。",
+        "status": "Images 3/4，conic 为预 CR 例外",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%E6%B8%90%E5%8F%98%E6%97%8F%20CSS",
+        "caniuse": "https://caniuse.com/?search=%E6%B8%90%E5%8F%98%E6%97%8F",
+        "demo": ".target {\n  /* linear-gradient, radial-gradient, conic-gradient, repeating-* */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "image-set()",
+        "slug": "image-set",
+        "syntax": "background-image: image-set(url(a.avif) type('image/avif') 1x, url(a.png) 1x);",
+        "summary": "按分辨率、格式、类型选择资源。",
+        "status": "Images 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=image-set%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=background-image",
+        "demo": ".target {\n  /* background-image: image-set(url(a.avif) type('image/avif') 1x, url(a.png) 1x); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "cross-fade()/image()",
+        "slug": "cross-fade-image",
+        "syntax": "background: cross-fade(url(a), url(b) 50%);",
+        "summary": "CSS 内部图像混合、fallback 和方向性图像。",
+        "status": "Images 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=cross-fade%28%29%2Fimage%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=background",
+        "demo": ".target {\n  /* background: cross-fade(url(a), url(b) 50%); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "object-fit/object-position",
+        "slug": "object-fit-object-position",
+        "syntax": "object-fit: cover; object-position: 50% 20%;",
+        "summary": "替代背景图 hack 控制替换元素裁剪。",
+        "status": "Images/Replaced elements",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=object-fit%2Fobject-position%20CSS",
+        "caniuse": "https://caniuse.com/?search=object-fit",
+        "demo": ".target {\n  /* object-fit: cover; object-position: 50% 20%; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "corner-shape",
+        "slug": "corner-shape",
+        "syntax": "border-radius: 2rem; corner-shape: squircle;",
+        "summary": "圆角之外的斜角、凹角、squircle 等角形。",
+        "status": "Borders 4 / 新能力",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=corner-shape%20CSS",
+        "caniuse": "https://caniuse.com/?search=border-radius",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "border-shape / partial borders",
+        "slug": "border-shape-partial-borders",
+        "syntax": "border-shape: ...; border-limit: ...",
+        "summary": "复杂边框路径、部分边框和 box decoration 扩展。",
+        "status": "Borders 4 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=border-shape%20%2F%20partial%20borders%20CSS",
+        "caniuse": "https://caniuse.com/?search=border-shape",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "box-shadow longhands",
+        "slug": "box-shadow-longhands",
+        "syntax": "box-shadow-color, box-shadow-offset, box-shadow-blur, box-shadow-spread",
+        "summary": "把阴影拆成可单独动画/覆盖的长属性。",
+        "status": "Borders/Shadow 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=box-shadow%20longhands%20CSS",
+        "caniuse": "https://caniuse.com/?search=box-shadow%20longhands",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "masking",
+        "slug": "masking",
+        "syntax": "mask-image, mask-mode, mask-composite, clip-path",
+        "summary": "Alpha/luminance 遮罩、裁剪路径、复杂形状。",
+        "status": "Masking 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=masking%20CSS",
+        "caniuse": "https://caniuse.com/?search=masking",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "basic shapes / shape()",
+        "slug": "basic-shapes-shape",
+        "syntax": "clip-path: shape(...); offset-path: shape(...)",
+        "summary": "CSS 原生可参数化形状函数。",
+        "status": "Shapes/Values / Baseline 2026",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=basic%20shapes%20%2F%20shape%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=clip-path",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "filters",
+        "slug": "filters",
+        "syntax": "filter: blur(8px) saturate(120%); backdrop-filter: blur(12px);",
+        "summary": "元素或背景图层后处理效果。",
+        "status": "Filter Effects 1/2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=filters%20CSS",
+        "caniuse": "https://caniuse.com/?search=filter",
+        "demo": ".target {\n  /* filter: blur(8px) saturate(120%); backdrop-filter: blur(12px); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "blend modes",
+        "slug": "blend-modes",
+        "syntax": "mix-blend-mode, background-blend-mode, isolation",
+        "summary": "控制图层合成和混合。",
+        "status": "Compositing & Blending",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=blend%20modes%20CSS",
+        "caniuse": "https://caniuse.com/?search=blend%20modes",
+        "demo": ".target {\n  /* mix-blend-mode, background-blend-mode, isolation */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "image-rendering",
+        "slug": "image-rendering",
+        "syntax": "image-rendering: crisp-edges | pixelated;",
+        "summary": "像素图/低分辨率资源缩放策略。",
+        "status": "Images / Baseline 2026 部分",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=image-rendering%20CSS",
+        "caniuse": "https://caniuse.com/?search=image-rendering",
+        "demo": ".target {\n  /* image-rendering: crisp-edges | pixelated; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "CSS Image Animation",
+        "slug": "css-image-animation",
+        "syntax": "image animation controls",
+        "summary": "控制动画图像格式播放和首帧等行为。",
+        "status": "Image Animation 1 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=CSS%20Image%20Animation%20CSS",
+        "caniuse": "https://caniuse.com/?search=CSS%20Image%20Animation",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "Gap decorations",
+        "slug": "gap-decorations",
+        "syntax": "column-rule/gap decoration generalized",
+        "summary": "给 grid/flex/multicol gap 绘制线条和装饰。",
+        "status": "CSS Gaps 1 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Gap%20decorations%20CSS",
+        "caniuse": "https://caniuse.com/?search=Gap%20decorations",
+        "demo": ".target {\n  /* column-rule/gap decoration generalized */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "滚动、溢出与滚动型组件",
+    "slug": "滚动-溢出与滚动型组件",
+    "items": [
+      {
+        "name": "Scroll snap",
+        "slug": "scroll-snap",
+        "syntax": "scroll-snap-type, scroll-snap-align, scroll-padding, scroll-margin",
+        "summary": "原生吸附滚动、轮播和分页滚动。",
+        "status": "可靠候选",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll_snap",
+        "caniuse": "https://caniuse.com/?search=Scroll%20snap",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "Scroll behavior",
+        "slug": "scroll-behavior",
+        "syntax": "scroll-behavior: smooth;",
+        "summary": "原生平滑滚动。",
+        "status": "CSSOM View",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Scroll%20behavior%20CSS",
+        "caniuse": "https://caniuse.com/?search=scroll-behavior",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "Overscroll behavior",
+        "slug": "overscroll-behavior",
+        "syntax": "overscroll-behavior: contain;",
+        "summary": "控制滚动边界链式传播和系统回弹。",
+        "status": "Overscroll 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Overscroll%20behavior%20CSS",
+        "caniuse": "https://caniuse.com/?search=overscroll-behavior",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "Scrollbar styling",
+        "slug": "scrollbar-styling",
+        "syntax": "scrollbar-color, scrollbar-width, scrollbar-gutter",
+        "summary": "滚动条颜色、宽度和布局预留。",
+        "status": "Scrollbars 1 / Overflow",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Scrollbar%20styling%20CSS",
+        "caniuse": "https://caniuse.com/?search=Scrollbar%20styling",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "Scroll anchoring",
+        "slug": "scroll-anchoring",
+        "syntax": "overflow-anchor",
+        "summary": "内容插入时保持视口位置，减少跳动。",
+        "status": "Scroll Anchoring 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Scroll%20anchoring%20CSS",
+        "caniuse": "https://caniuse.com/?search=Scroll%20anchoring",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "Overflow clip",
+        "slug": "overflow-clip",
+        "syntax": "overflow: clip; overflow-clip-margin: 1rem;",
+        "summary": "不产生滚动容器的裁剪和裁剪边距。",
+        "status": "Overflow 3/4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Overflow%20clip%20CSS",
+        "caniuse": "https://caniuse.com/?search=overflow",
+        "demo": ".target { clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }\n"
+      },
+      {
+        "name": "line clamp / block ellipsis",
+        "slug": "line-clamp-block-ellipsis",
+        "syntax": "line-clamp, block-ellipsis",
+        "summary": "多行文本截断和块级省略。",
+        "status": "Overflow 4/5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=line%20clamp%20%2F%20block%20ellipsis%20CSS",
+        "caniuse": "https://caniuse.com/?search=line%20clamp%20%2F%20block%20ellipsis",
+        "demo": ".target {\n  /* line-clamp, block-ellipsis */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "CSS carousels",
+        "slug": "css-carousels",
+        "syntax": "::scroll-button(), ::scroll-marker, scroll-target-group",
+        "summary": "无需 JS 的滚动按钮、分页点和滚动目标组。",
+        "status": "Overflow 5 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Ascroll-button%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Ascroll-button%28%29",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "Scroll-state queries",
+        "slug": "scroll-state-queries",
+        "syntax": "@container scroll-state(stuck: top)",
+        "summary": "滚动状态驱动样式，常用于 sticky header 阴影等。",
+        "status": "Conditional 5",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40container%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40container",
+        "demo": ".stage { container-type: inline-size; }\n@container (width > 360px) {\n  .target { width: 220px; }\n}\n"
+      },
+      {
+        "name": "Spatial navigation",
+        "slug": "spatial-navigation",
+        "syntax": "spatial-navigation-action, nav-*",
+        "summary": "遥控器/键盘方向键空间导航。",
+        "status": "Spatial Navigation 1 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Spatial%20navigation%20CSS",
+        "caniuse": "https://caniuse.com/?search=Spatial%20navigation",
+        "demo": ".target {\n  /* spatial-navigation-action, nav-* */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "动画、变换、运动路径与视图过渡",
+    "slug": "动画-变换-运动路径与视图过渡",
+    "items": [
+      {
+        "name": "Transitions / Animations",
+        "slug": "transitions-animations",
+        "syntax": "transition, @keyframes, animation-*",
+        "summary": "CSS 属性随时间变化。",
+        "status": "Snapshot 粗略互通/可发布",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Transitions%20%2F%20Animations%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40keyframes",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "Individual transforms",
+        "slug": "individual-transforms",
+        "syntax": "translate, rotate, scale",
+        "summary": "单独控制变换组件，组合动画更稳定。",
+        "status": "Transforms 2 / 预 CR 例外",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Individual%20transforms%20CSS",
+        "caniuse": "https://caniuse.com/?search=Individual%20transforms",
+        "demo": ".target {\n  /* translate, rotate, scale */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "3D transforms",
+        "slug": "3d-transforms",
+        "syntax": "transform-style: preserve-3d; perspective; rotate3d();",
+        "summary": "三维变换和透视。",
+        "status": "Transforms 2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=3D%20transforms%20CSS",
+        "caniuse": "https://caniuse.com/?search=transform-style",
+        "demo": ".target {\n  /* transform-style: preserve-3d; perspective; rotate3d(); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Motion path",
+        "slug": "motion-path",
+        "syntax": "offset-path, offset-distance, offset-rotate, offset-anchor",
+        "summary": "沿路径定位和动画。",
+        "status": "Motion Path 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Motion%20path%20CSS",
+        "caniuse": "https://caniuse.com/?search=Motion%20path",
+        "demo": ".target:first-child { anchor-name: --demo; }\n.target + .target { position-anchor: --demo; }\n"
+      },
+      {
+        "name": "Easing functions",
+        "slug": "easing-functions",
+        "syntax": "linear(), cubic-bezier(), steps()",
+        "summary": "分段线性、贝塞尔、步进缓动。",
+        "status": "Easing 1/2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=linear%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=linear%28%29",
+        "demo": ".target {\n  /* linear(), cubic-bezier(), steps() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Discrete transitions",
+        "slug": "discrete-transitions",
+        "syntax": "transition-behavior: allow-discrete;",
+        "summary": "display、overlay 等离散值也可参与过渡。",
+        "status": "Transitions 2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Discrete%20transitions%20CSS",
+        "caniuse": "https://caniuse.com/?search=transition-behavior",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "@starting-style",
+        "slug": "at-starting-style",
+        "syntax": "@starting-style { opacity: 0; }",
+        "summary": "进入 DOM 或从 display:none 出现时有起始样式。",
+        "status": "Transitions 2 / Baseline",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@starting-style",
+        "caniuse": "https://caniuse.com/?search=%40starting-style",
+        "demo": "@starting-style { opacity: 0; }"
+      },
+      {
+        "name": "animation-composition",
+        "slug": "animation-composition",
+        "syntax": "animation-composition: add | accumulate | replace;",
+        "summary": "多个动画之间的合成模式。",
+        "status": "Animations 2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=animation-composition%20CSS",
+        "caniuse": "https://caniuse.com/?search=animation-composition",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "Scroll-driven animations",
+        "slug": "scroll-driven-animations",
+        "syntax": "animation-timeline: scroll(); view-timeline-name: --card;",
+        "summary": "滚动进度或元素进入视口驱动动画。",
+        "status": "Scroll Animations 1",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations",
+        "caniuse": "https://caniuse.com/?search=animation-timeline",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "animation-range",
+        "slug": "animation-range",
+        "syntax": "animation-range: entry 0% cover 50%;",
+        "summary": "限定 scroll/view timeline 的有效区间。",
+        "status": "Scroll Animations 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=animation-range%20CSS",
+        "caniuse": "https://caniuse.com/?search=animation-range",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "View transitions",
+        "slug": "view-transitions",
+        "syntax": "view-transition-name: card; document.startViewTransition(...)",
+        "summary": "页面状态或跨文档导航过渡。",
+        "status": "View Transitions 1/2",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
+        "caniuse": "https://caniuse.com/?search=view-transition-name",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "View transition classes/types",
+        "slug": "view-transition-classes-types",
+        "syntax": "view-transition-class, @view-transition { navigation: auto; }",
+        "summary": "复用过渡样式、跨页面过渡声明。",
+        "status": "View Transitions 2 / Baseline 2025",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=View%20transition%20classes%2Ftypes%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40view-transition",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "Animation triggers",
+        "slug": "animation-triggers",
+        "syntax": "animation-trigger, trigger-exit 等",
+        "summary": "用状态/事件触发动画，而非只靠时间轴。",
+        "status": "草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Animation%20triggers%20CSS",
+        "caniuse": "https://caniuse.com/?search=Animation%20triggers",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "Pointer-driven animations",
+        "slug": "pointer-driven-animations",
+        "syntax": "pointer-timeline / pointer-driven concepts",
+        "summary": "鼠标/指针位置驱动动画。",
+        "status": "草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Pointer-driven%20animations%20CSS",
+        "caniuse": "https://caniuse.com/?search=Pointer-driven%20animations",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      }
+    ]
+  },
+  {
+    "title": "表单、控件与交互 UI",
+    "slug": "表单-控件与交互-ui",
+    "items": [
+      {
+        "name": "accent-color",
+        "slug": "accent-color-2",
+        "syntax": "accent-color: hotpink;",
+        "summary": "快速定制原生表单强调色。",
+        "status": "CSS UI 4",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color",
+        "caniuse": "https://caniuse.com/?search=accent-color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "appearance/base appearance",
+        "slug": "appearance-base-appearance",
+        "syntax": "appearance: none | auto | base-select;",
+        "summary": "控制原生控件外观和可定制 select 模式。",
+        "status": "CSS UI/Forms",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=appearance%2Fbase%20appearance%20CSS",
+        "caniuse": "https://caniuse.com/?search=appearance",
+        "demo": ".target {\n  /* appearance: none | auto | base-select; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Customizable select",
+        "slug": "customizable-select",
+        "syntax": "select, ::picker(select) { appearance: base-select; }",
+        "summary": "原生 select 的按钮、picker、option、图标可样式化。",
+        "status": "CSS Forms 1 / 支持有限",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Forms/Customizable_select",
+        "caniuse": "https://caniuse.com/?search=%3A%3Apicker",
+        "demo": ".target {\n  /* select, ::picker(select) { appearance: base-select; } */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Form control parts",
+        "slug": "form-control-parts",
+        "syntax": "::file-selector-button, ::picker-icon, ::checkmark, ::thumb, ::track, ::fill",
+        "summary": "文件按钮、下拉箭头、勾选标记、滑块轨道等部件。",
+        "status": "Forms/Pseudo",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Afile-selector-button%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Afile-selector-button",
+        "demo": "::file-selector-button, ::picker-icon, ::checkmark, ::thumb, ::track, ::fill"
+      },
+      {
+        "name": "caret-color",
+        "slug": "caret-color",
+        "syntax": "caret-color: var(--brand);",
+        "summary": "输入光标颜色控制。",
+        "status": "CSS UI",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=caret-color%20CSS",
+        "caniuse": "https://caniuse.com/?search=caret-color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "user-select",
+        "slug": "user-select",
+        "syntax": "user-select: none | text | all | contain;",
+        "summary": "控制文本选择行为。",
+        "status": "CSS UI",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=user-select%20CSS",
+        "caniuse": "https://caniuse.com/?search=user-select",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "resize logical values",
+        "slug": "resize-logical-values",
+        "syntax": "resize: block | inline;",
+        "summary": "按逻辑轴调整可缩放控件。",
+        "status": "CSS UI 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=resize%20logical%20values%20CSS",
+        "caniuse": "https://caniuse.com/?search=resize",
+        "demo": ".target {\n  /* resize: block | inline; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "cursor url-set",
+        "slug": "cursor-url-set",
+        "syntax": "cursor: url-set(...), pointer;",
+        "summary": "更清晰地提供多分辨率指针资源。",
+        "status": "CSS UI 4 / 预 CR 例外",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=cursor%20url-set%20CSS",
+        "caniuse": "https://caniuse.com/?search=cursor",
+        "demo": ".target {\n  /* cursor: url-set(...), pointer; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "outline-color:auto",
+        "slug": "outline-colorauto",
+        "syntax": "outline-color: auto;",
+        "summary": "让 UA 选择可访问的焦点轮廓颜色。",
+        "status": "CSS UI 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=outline-color%3Aauto%20CSS",
+        "caniuse": "https://caniuse.com/?search=outline-color",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "highlight pseudos",
+        "slug": "highlight-pseudos",
+        "syntax": "::selection, ::target-text, ::highlight(custom)",
+        "summary": "选区、文本片段和自定义范围高亮。",
+        "status": "Pseudo/Highlight",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Aselection%20CSS",
+        "caniuse": "https://caniuse.com/?search=%3A%3Aselection",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "color-scheme + forced-colors",
+        "slug": "color-scheme-plus-forced-colors",
+        "syntax": "color-scheme: light dark; forced-color-adjust: none;",
+        "summary": "让原生控件和高对比模式协作。",
+        "status": "Color Adjustment",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=color-scheme%20%2B%20forced-colors%20CSS",
+        "caniuse": "https://caniuse.com/?search=color-scheme",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "reading-flow/order",
+        "slug": "reading-flow-order-2",
+        "syntax": "reading-flow: flex-visual; reading-order: 1;",
+        "summary": "视觉重排场景下控制可访问阅读与 Tab 顺序。",
+        "status": "Display 4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=reading-flow%2Forder%20CSS",
+        "caniuse": "https://caniuse.com/?search=reading-flow",
+        "demo": ".stage { display: flex; justify-content: center; align-items: center; }\n"
+      }
+    ]
+  },
+  {
+    "title": "生成内容、列表、计数器与内容引用",
+    "slug": "生成内容-列表-计数器与内容引用",
+    "items": [
+      {
+        "name": "@counter-style",
+        "slug": "at-counter-style",
+        "syntax": "@counter-style thumbs { system: cyclic; symbols: 👍; suffix: ' '; }",
+        "summary": "自定义有序/无序列表标记体系。",
+        "status": "官方定义",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@counter-style",
+        "caniuse": "https://caniuse.com/?search=%40counter-style",
+        "demo": "@counter-style thumbs { system: cyclic; symbols: 👍; suffix: ' '; }"
+      },
+      {
+        "name": "counter-set",
+        "slug": "counter-set",
+        "syntax": "counter-set: section 3;",
+        "summary": "显式设置计数器值，补足 reset/increment。",
+        "status": "Lists 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=counter-set%20CSS",
+        "caniuse": "https://caniuse.com/?search=counter-set",
+        "demo": ".target {\n  /* counter-set: section 3; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "::marker styling",
+        "slug": "marker-styling",
+        "syntax": "li::marker { color: red; content: counters(item, '.') '. '; }",
+        "summary": "列表标记内容和样式控制。",
+        "status": "Pseudo 4 / 预 CR 例外",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%3A%3Amarker%20styling%20CSS",
+        "caniuse": "https://caniuse.com/?search=li",
+        "demo": ".target {\n  background: oklch(72% 0.16 210);\n  color: oklch(22% 0.04 240);\n}\n"
+      },
+      {
+        "name": "content 扩展",
+        "slug": "content-扩展",
+        "syntax": "content: url(icon.svg) / '替代文本';",
+        "summary": "生成内容、替代文本、图像内容。",
+        "status": "Generated Content 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=content%20%E6%89%A9%E5%B1%95%20CSS",
+        "caniuse": "https://caniuse.com/?search=content",
+        "demo": ".target {\n  /* content: url(icon.svg) / '替代文本'; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "quotes and counters",
+        "slug": "quotes-and-counters",
+        "syntax": "open-quote, close-quote, counter(), counters()",
+        "summary": "语言化引号和层级编号。",
+        "status": "Generated Content/Lists",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=quotes%20and%20counters%20CSS",
+        "caniuse": "https://caniuse.com/?search=counter%28%29",
+        "demo": ".target {\n  /* open-quote, close-quote, counter(), counters() */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "target-* functions",
+        "slug": "target-star-functions",
+        "syntax": "target-counter(), target-counters(), target-text()",
+        "summary": "引用目标页码、编号、文本，常用于出版。",
+        "status": "GCPM 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=target-counter%28%29%20CSS",
+        "caniuse": "https://caniuse.com/?search=target-counter%28%29",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "leaders",
+        "slug": "leaders",
+        "syntax": "content: leader('.') target-counter(attr(href url), page);",
+        "summary": "目录点线引导和页码。",
+        "status": "GCPM 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=leaders%20CSS",
+        "caniuse": "https://caniuse.com/?search=content",
+        "demo": ".target {\n  /* content: leader('.') target-counter(attr(href url), page); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "running elements",
+        "slug": "running-elements",
+        "syntax": "position: running(header); content: element(header);",
+        "summary": "页眉页脚复用文档内容。",
+        "status": "GCPM 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=running%20elements%20CSS",
+        "caniuse": "https://caniuse.com/?search=position",
+        "demo": ".target {\n  /* position: running(header); content: element(header); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "string-set",
+        "slug": "string-set",
+        "syntax": "string-set: chapter content(text);",
+        "summary": "把内容捕获为页面页眉/目录字符串。",
+        "status": "GCPM 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=string-set%20CSS",
+        "caniuse": "https://caniuse.com/?search=string-set",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "分页、打印与出版排版",
+    "slug": "分页-打印与出版排版",
+    "items": [
+      {
+        "name": "@page",
+        "slug": "at-page",
+        "syntax": "@page { size: A4; margin: 20mm; }",
+        "summary": "分页媒介尺寸、边距和页面级样式。",
+        "status": "Paged Media 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40page%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40page",
+        "demo": "@page { size: A4; margin: 20mm; }"
+      },
+      {
+        "name": "page selectors",
+        "slug": "page-selectors",
+        "syntax": "@page :first, @page :left, @page :right, @page :blank",
+        "summary": "首页、左右页、空白页分别控制。",
+        "status": "Paged Media 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40page%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40page",
+        "demo": "@page :first, @page :left, @page :right, @page :blank"
+      },
+      {
+        "name": "margin boxes",
+        "slug": "margin-boxes",
+        "syntax": "@top-center { content: string(chapter); }",
+        "summary": "页眉页脚和边距区域内容。",
+        "status": "Paged Media/GCPM",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=%40top-center%20CSS",
+        "caniuse": "https://caniuse.com/?search=%40top-center",
+        "demo": "@top-center { content: string(chapter); }"
+      },
+      {
+        "name": "named pages",
+        "slug": "named-pages",
+        "syntax": ".cover { page: cover; } @page cover { ... }",
+        "summary": "不同章节使用不同页面模板。",
+        "status": "Paged Media 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=named%20pages%20CSS",
+        "caniuse": "https://caniuse.com/?search=page",
+        "demo": ".cover { page: cover; } @page cover { ... }"
+      },
+      {
+        "name": "bleed and marks",
+        "slug": "bleed-and-marks",
+        "syntax": "bleed: 3mm; marks: crop cross;",
+        "summary": "印刷出血和裁切/套准标记。",
+        "status": "Paged Media 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=bleed%20and%20marks%20CSS",
+        "caniuse": "https://caniuse.com/?search=bleed",
+        "demo": ".target {\n  /* bleed: 3mm; marks: crop cross; */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "fragmentation",
+        "slug": "fragmentation",
+        "syntax": "break-before, break-after, break-inside, orphans, widows",
+        "summary": "跨页、跨列、跨区域断点控制。",
+        "status": "Fragmentation 3/4",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=fragmentation%20CSS",
+        "caniuse": "https://caniuse.com/?search=fragmentation",
+        "demo": ".target {\n  /* break-before, break-after, break-inside, orphans, widows */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "page floats",
+        "slug": "page-floats",
+        "syntax": "float-reference, float-defer, float-offset",
+        "summary": "出版物中的图表浮动与延后放置。",
+        "status": "Page Floats 3 草案",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=page%20floats%20CSS",
+        "caniuse": "https://caniuse.com/?search=page%20floats",
+        "demo": ".target {\n  /* float-reference, float-defer, float-offset */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "footnotes",
+        "slug": "footnotes",
+        "syntax": "float: footnote; @footnote { ... }",
+        "summary": "脚注区域、脚注编号和脚注规则。",
+        "status": "GCPM 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=footnotes%20CSS",
+        "caniuse": "https://caniuse.com/?search=float",
+        "demo": ".target {\n  /* float: footnote; @footnote { ... } */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "CSS Speech",
+        "slug": "css-speech",
+        "syntax": "speak, voice-family, pause-before/after",
+        "summary": "面向语音渲染的样式控制。",
+        "status": "Speech 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=CSS%20Speech%20CSS",
+        "caniuse": "https://caniuse.com/?search=CSS%20Speech",
+        "demo": ".target {\n  /* speak, voice-family, pause-before/after */\n  outline: 3px solid var(--brand);\n}\n"
+      }
+    ]
+  },
+  {
+    "title": "CSS 相关 Web APIs 与 Houdini 能力",
+    "slug": "css-相关-web-apis-与-houdini-能力",
+    "items": [
+      {
+        "name": "CSSOM",
+        "slug": "cssom",
+        "syntax": "document.styleSheets, CSSStyleRule, CSSStyleDeclaration",
+        "summary": "读取、解析、序列化和操作 CSS 规则。",
+        "status": "CSSOM 1",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model",
+        "caniuse": "https://caniuse.com/?search=CSSOM",
+        "demo": ".target {\n  /* document.styleSheets, CSSStyleRule, CSSStyleDeclaration */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "CSSOM View",
+        "slug": "cssom-view",
+        "syntax": "getBoundingClientRect(), scrollIntoView(), visualViewport",
+        "summary": "视口、滚动、布局盒查询。",
+        "status": "CSSOM View",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=CSSOM%20View%20CSS",
+        "caniuse": "https://caniuse.com/?search=ect%28%29",
+        "demo": ".stage { overflow-x: auto; scroll-snap-type: x mandatory; }\n.target { scroll-snap-align: center; flex: 0 0 auto; }\n"
+      },
+      {
+        "name": "Geometry interfaces",
+        "slug": "geometry-interfaces",
+        "syntax": "DOMPoint, DOMRect, DOMMatrix",
+        "summary": "几何对象、矩阵、坐标转换。",
+        "status": "Geometry 1",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Geometry%20interfaces%20CSS",
+        "caniuse": "https://caniuse.com/?search=Geometry%20interfaces",
+        "demo": ".target {\n  /* DOMPoint, DOMRect, DOMMatrix */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Resize Observer",
+        "slug": "resize-observer",
+        "syntax": "new ResizeObserver(entries => ...)",
+        "summary": "观察元素尺寸变化，补足纯 CSS 无法通知 JS 的场景。",
+        "status": "Snapshot 粗略互通",
+        "mdn": "https://developer.mozilla.org/en-US/docs/Web/API/Resize_Observer_API",
+        "caniuse": "https://caniuse.com/?search=Resize%20Observer",
+        "demo": ".target {\n  /* new ResizeObserver(entries => ...) */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Font Loading API",
+        "slug": "font-loading-api",
+        "syntax": "document.fonts.load(...)",
+        "summary": "脚本控制字体加载和字体集合状态。",
+        "status": "Font Loading 3",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Font%20Loading%20API%20CSS",
+        "caniuse": "https://caniuse.com/?search=Font%20Loading%20API",
+        "demo": ".target {\n  width: 220px;\n  text-wrap: balance;\n  font-size: clamp(18px, 4vw, 34px);\n}\n"
+      },
+      {
+        "name": "Web Animations API",
+        "slug": "web-animations-api",
+        "syntax": "element.animate(...)",
+        "summary": "与 CSS 动画模型共享 timing/effect 的 JS API。",
+        "status": "Web Animations 1/2",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Web%20Animations%20API%20CSS",
+        "caniuse": "https://caniuse.com/?search=Web%20Animations%20API",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "Custom Highlight API",
+        "slug": "custom-highlight-api",
+        "syntax": "CSS.highlights.set('name', new Highlight(range));",
+        "summary": "用 JS 注册范围，CSS 用 ::highlight(name) 样式化。",
+        "status": "Highlight 1 / Baseline 2026",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Custom%20Highlight%20API%20CSS",
+        "caniuse": "https://caniuse.com/?search=Custom%20Highlight%20API",
+        "demo": ".target {\n  /* CSS.highlights.set('name', new Highlight(range)); */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Properties and Values API",
+        "slug": "properties-and-values-api",
+        "syntax": "CSS.registerProperty(...)",
+        "summary": "运行时注册可类型化、可动画的 CSS 自定义属性。",
+        "status": "Houdini",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Properties%20and%20Values%20API%20CSS",
+        "caniuse": "https://caniuse.com/?search=Properties%20and%20Values%20API",
+        "demo": ".target {\n  /* CSS.registerProperty(...) */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Typed OM",
+        "slug": "typed-om",
+        "syntax": "CSSUnitValue, StylePropertyMap",
+        "summary": "以 typed object 表示 CSS 值。",
+        "status": "Houdini/CSS Typed OM",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Typed%20OM%20CSS",
+        "caniuse": "https://caniuse.com/?search=Typed%20OM",
+        "demo": ".target {\n  /* CSSUnitValue, StylePropertyMap */\n  outline: 3px solid var(--brand);\n}\n"
+      },
+      {
+        "name": "Paint/Layout/Animation Worklets",
+        "slug": "paint-layout-animation-worklets",
+        "syntax": "paint(worklet-name), CSS.paintWorklet.addModule(...)",
+        "summary": "浏览器渲染管线扩展点。",
+        "status": "Houdini，支持差异较大",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=Paint%2FLayout%2FAnimation%20Worklets%20CSS",
+        "caniuse": "https://caniuse.com/?search=Paint%2FLayout%2FAnimation%20Worklets",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      },
+      {
+        "name": "View Transition API",
+        "slug": "view-transition-api",
+        "syntax": "document.startViewTransition(callback)",
+        "summary": "与 CSS view-transition-* 伪元素协作。",
+        "status": "View Transitions",
+        "mdn": "https://developer.mozilla.org/en-US/search?q=View%20Transition%20API%20CSS",
+        "caniuse": "https://caniuse.com/?search=View%20Transition%20API",
+        "demo": ".target { animation: pulse 1.8s ease-in-out infinite alternate; }\n@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }\n"
+      }
+    ]
+  }
+]
