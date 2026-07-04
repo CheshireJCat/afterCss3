@@ -256,6 +256,7 @@
   margin: 22px 0 30px;
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
+  overflow: hidden;
 }
 
 .css-demo__head {
@@ -293,11 +294,108 @@
   font-size: 14px;
 }
 
-.css-demo pre {
+.css-demo__code-shell {
+  margin-top: 14px;
+  border-top: 1px solid var(--vp-c-divider);
+  background: color-mix(in oklch, var(--vp-c-bg) 88%, var(--vp-c-bg-soft));
+}
+
+.css-demo__codebar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+  font-family: var(--vp-font-family-mono);
+  font-size: 12px;
+}
+
+.css-demo__codebar span:first-child {
+  color: var(--vp-c-brand-1);
+  font-weight: 760;
+  letter-spacing: .04em;
+}
+
+.vp-doc .css-demo pre.css-demo__code {
   margin: 0;
+  padding: 0;
+  max-width: 100%;
+  max-height: min(420px, 52vh);
+  overflow: auto;
   border-radius: 0;
   border: 0;
-  border-top: 1px solid var(--vp-c-divider);
+  background: transparent;
+}
+
+.vp-doc .css-demo pre.css-demo__code code {
+  display: block;
+  width: max-content;
+  min-width: 100%;
+  padding: 12px 0;
+  color: var(--vp-c-text-1);
+  background: transparent;
+  font-size: 13px;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+.css-demo__code-line {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+}
+
+.css-demo__line-number {
+  position: sticky;
+  left: 0;
+  flex: 0 0 3.5rem;
+  padding: 0 12px 0 8px;
+  border-right: 1px solid color-mix(in oklch, var(--vp-c-divider) 72%, transparent);
+  background: color-mix(in oklch, var(--vp-c-bg) 90%, var(--vp-c-bg-soft));
+  color: color-mix(in oklch, var(--vp-c-text-2) 62%, transparent);
+  text-align: right;
+  user-select: none;
+}
+
+.css-demo__line-code {
+  display: block;
+  padding: 0 18px;
+  white-space: pre;
+}
+
+.css-demo__token--comment {
+  color: color-mix(in oklch, var(--vp-c-text-2) 78%, transparent);
+  font-style: italic;
+}
+
+.css-demo__token--at {
+  color: var(--after-accent-warm);
+  font-weight: 720;
+}
+
+.css-demo__token--selector {
+  color: var(--vp-c-brand-1);
+  font-weight: 690;
+}
+
+.css-demo__token--property {
+  color: color-mix(in oklch, var(--after-accent-gold) 86%, var(--vp-c-text-1));
+}
+
+.css-demo__token--function {
+  color: color-mix(in oklch, var(--vp-c-brand-2) 76%, var(--vp-c-text-1));
+}
+
+.css-demo__token--string,
+.css-demo__token--color {
+  color: color-mix(in oklch, var(--after-accent-warm) 78%, var(--vp-c-text-1));
+}
+
+.css-demo__token--number {
+  color: color-mix(in oklch, var(--after-accent-gold) 78%, var(--vp-c-text-1));
 }
 
 .category-index {
