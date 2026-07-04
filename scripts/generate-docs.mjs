@@ -127,7 +127,6 @@ ${links}
 function homePage(locale, categories) {
   const t = locales[locale]
   const featureCount = categories.reduce((sum, category) => sum + category.items.length, 0)
-  const languageHref = locale === 'en' ? 'zh/' : '../'
   const categoryCards = categories
     .map((category) => {
       const first = category.items.slice(0, 3).map((item) => item.name).join(locale === 'en' ? ', ' : '、')
@@ -157,7 +156,6 @@ hero:
     <p>${t.intro(categories.length, featureCount)}</p>
     <div class="hero-actions">
       <a href="abilities/">${t.start}</a>
-      <a href="${languageHref}">${t.navLanguage}</a>
       <a href="https://caniuse.com/" target="_blank" rel="noreferrer">Can I Use</a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer">MDN CSS</a>
     </div>

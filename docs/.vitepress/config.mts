@@ -13,7 +13,6 @@ function themeConfig(locale: 'en' | 'zh') {
     },
     nav: [
       { text: t.navCapabilities, link: isEnglish ? '/abilities/' : '/zh/abilities/' },
-      { text: t.navLanguage, link: isEnglish ? '/zh/' : '/' },
       { text: 'MDN CSS', link: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
       { text: 'Can I Use', link: 'https://caniuse.com/' }
     ],

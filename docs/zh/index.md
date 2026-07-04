@@ -19,7 +19,6 @@ hero:
     <p>当前迁移 14 个分类、186 个能力条目。左侧导航按能力域分组；每个条目页固定包含说明、MDN、demo 和 Can I Use 兼容性入口。</p>
     <div class="hero-actions">
       <a href="abilities/">开始查阅</a>
-      <a href="../">English</a>
       <a href="https://caniuse.com/" target="_blank" rel="noreferrer">Can I Use</a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer">MDN CSS</a>
     </div>

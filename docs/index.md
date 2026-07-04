@@ -19,7 +19,6 @@ hero:
     <p>This site currently organizes 14 categories and 186 capability entries. The sidebar groups features by capability area, and each feature page includes an explanation, MDN link, demo, and Can I Use compatibility entry.</p>
     <div class="hero-actions">
       <a href="abilities/">Start browsing</a>
-      <a href="zh/">中文</a>
       <a href="https://caniuse.com/" target="_blank" rel="noreferrer">Can I Use</a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer">MDN CSS</a>
     </div>
