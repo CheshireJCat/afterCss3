@@ -4,18 +4,26 @@
 [![VitePress](https://img.shields.io/badge/built%20with-VitePress-646CFF.svg)](https://vitepress.dev/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](#license)
 
+English | [简体中文](README.zh-CN.md)
+
 After CSS3 is a curated navigation site for modern CSS capabilities after the CSS3 era. It organizes new CSS features by capability area and gives each feature a short explanation, MDN entry, live-readable demo, and a Can I Use compatibility link.
 
 CSS no longer evolves as a single "CSS4" release. It evolves through independent modules such as Selectors, Cascade, Color, Values and Units, Containment, Anchor Positioning, View Transitions, and many others. This project turns that scattered evolution into a browsable knowledge base.
 
 Live site: [cheshirejcat.github.io/afterCss3](https://cheshirejcat.github.io/afterCss3/)
 
+## Languages
+
+- English is the default site language: [`/`](https://cheshirejcat.github.io/afterCss3/)
+- Simplified Chinese is available at: [`/zh/`](https://cheshirejcat.github.io/afterCss3/zh/)
+- The README is also available in both languages: `README.md` and `README.zh-CN.md`.
+
 ## What Is Included
 
 - 14 categorized capability areas, covering language architecture, selectors, queries, layout, values, color, typography, visual effects, scrolling, animation, forms, generated content, paged media, and CSS-related APIs.
-- 186 feature pages generated from structured data.
+- 186 feature pages generated from structured data for each supported language.
 - A consistent page format for every feature: plain-language explanation, representative syntax, demo, MDN link, Can I Use link, maturity/status notes, and usage guidance.
-- A VitePress-based documentation site with local search, GitHub Pages deployment, and generated sidebar navigation.
+- A VitePress-based documentation site with local search, GitHub Pages deployment, i18n routing, and generated sidebar navigation.
 
 ## Use Cases
 
@@ -55,9 +63,11 @@ npm run docs:preview
 |   `-- abilities.json          # Structured source of CSS capability data
 |-- docs/
 |   |-- .vitepress/             # VitePress config, theme, generated sidebar
-|   |-- abilities/              # Generated category and feature pages
+|   |-- abilities/              # Generated English category and feature pages
+|   |-- zh/                     # Generated Simplified Chinese site
 |   `-- index.md                # Generated homepage
 |-- scripts/
+|   |-- i18n.mjs                # Locale copy and feature translations
 |   `-- generate-docs.mjs       # Data-to-Markdown generator
 `-- .github/workflows/
     `-- deploy.yml              # GitHub Pages deployment workflow
@@ -82,6 +92,8 @@ After editing the data, regenerate the site:
 npm run docs:generate
 ```
 
+English display names, summaries, and UI copy live in `scripts/i18n.mjs`. When adding or renaming a capability, update the i18n map so the default English site stays complete.
+
 ## Deployment
 
 The site is deployed to GitHub Pages through GitHub Actions. The workflow builds VitePress and uploads `docs/.vitepress/dist` as the Pages artifact.
@@ -91,7 +103,7 @@ Repository Pages settings should use:
 - Source: GitHub Actions
 - Base path: `/afterCss3/`
 
-The VitePress `base` is configured for the repository Pages URL by default.
+The VitePress `base` is configured for the repository Pages URL by default. English is served at `/afterCss3/`; Simplified Chinese is served at `/afterCss3/zh/`.
 
 ## Contributing
 
@@ -102,6 +114,7 @@ Contributions are welcome. Useful improvements include:
 - Replacing broad MDN or Can I Use search links with more precise entries.
 - Improving demos while keeping them small and readable.
 - Fixing category placement or terminology.
+- Improving English or Simplified Chinese translations.
 
 Before submitting a change, run:
 

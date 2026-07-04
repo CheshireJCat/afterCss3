@@ -1,13 +1,14 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { locales, localizeCategory, localizeItem } from './i18n.mjs'
 
 const root = process.cwd()
 const dataPath = path.join(root, 'data/abilities.json')
 const docsDir = path.join(root, 'docs')
-const abilitiesDir = path.join(docsDir, 'abilities')
 const sidebarPath = path.join(docsDir, '.vitepress/sidebar.generated.ts')
 
-const categories = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
+const sourceCategories = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
+const localeOrder = ['en', 'zh']
 
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true })
@@ -33,68 +34,93 @@ function write(file, content) {
   fs.writeFileSync(file, content, 'utf8')
 }
 
-function itemUrl(category, item) {
-  return `/abilities/${category.slug}/${item.slug}`
+function localeRoot(locale) {
+  return locale === 'en' ? docsDir : path.join(docsDir, locale)
 }
 
-function categoryUrl(category) {
-  return `/abilities/${category.slug}/`
+function localePrefix(locale) {
+  return locale === 'en' ? '' : `/${locale}`
 }
 
-function featurePage(category, item, index, total) {
+function localizeCategories(locale) {
+  return sourceCategories.map((category) => {
+    const localizedCategory = localizeCategory(category, locale)
+    return {
+      ...localizedCategory,
+      items: category.items.map((item) => localizeItem(item, locale))
+    }
+  })
+}
+
+function itemUrl(locale, category, item) {
+  return `${localePrefix(locale)}/abilities/${category.slug}/${item.slug}`
+}
+
+function categoryUrl(locale, category) {
+  return `${localePrefix(locale)}/abilities/${category.slug}/`
+}
+
+function featurePage(locale, category, item, index, total) {
+  const t = locales[locale]
   const demoCode = escapeAttr(item.demo)
   const syntax = escapeHtml(item.syntax)
+
   return `# ${item.name}
 
-<FeatureLinks mdn="${escapeAttr(item.mdn)}" caniuse="${escapeAttr(item.caniuse)}" status="${escapeAttr(item.status)}" />
+<FeatureLinks mdn="${escapeAttr(item.mdn)}" caniuse="${escapeAttr(item.caniuse)}" status="${escapeAttr(item.status)}" label="${escapeAttr(t.referenceLinks)}" />
 
-## 简明说明
+## ${t.summary}
 
 ${item.summary}
 
-## 代表语法
+## ${t.syntax}
 
 \`\`\`css
 ${item.syntax}
 \`\`\`
 
-## Demo 演示
+## ${t.demo}
 
-<CssDemo title="${escapeAttr(item.name)}" code="${demoCode}" note="不同浏览器对草案能力的支持差异较大；这里优先展示语法和渐进增强思路，兼容性请以右侧 Can I Use 链接为准。" />
+<CssDemo title="${escapeAttr(item.name)}" code="${demoCode}" note="${escapeAttr(t.demoNote)}" lang="${escapeAttr(t.lang)}" badge="${escapeAttr(t.liveish)}" />
 
-## 什么时候用
+## ${t.whenToUse}
 
-- 当你需要解决「${oneLine(item.summary)}」这类问题时，可以优先考虑它。
-- 如果状态里包含“草案”“支持有限”“实现推进中”，建议用 \`@supports\`、特性检测或保守 fallback。
-- 如果目标用户浏览器较旧，先从 MDN 与 Can I Use 核对支持矩阵，再决定是否进入生产。
+- ${t.useCase(oneLine(item.summary))}
+- ${t.draftNote}
+- ${t.supportNote}
 
-## 迁移来源
+## ${t.source}
 
-- 分类：${category.title}
-- 成熟度 / 来源：${item.status}
-- 原始代表语法：\`${syntax}\`
-- 本分类序号：${index + 1} / ${total}
+- ${t.category}: ${category.title}
+- ${t.status}: ${item.status}
+- ${t.originalSyntax}: \`${syntax}\`
+- ${t.categoryPosition(index, total)}
 `
 }
 
-function categoryPage(category) {
+function categoryPage(locale, category) {
+  const t = locales[locale]
   const links = category.items
-    .map((item) => `- [${item.name}](${item.slug}.md) — ${item.summary}`)
+    .map((item) => `- [${item.name}](${item.slug}.md) - ${item.summary}`)
     .join('\n')
+
   return `# ${category.title}
 
-这个分类包含 ${category.items.length} 个能力条目。每个条目都包含简明说明、MDN 入口、Can I Use 入口和可运行/可阅读的 demo。
+${t.contains(category.items.length)}
 
 ${links}
 `
 }
 
-function homePage() {
+function homePage(locale, categories) {
+  const t = locales[locale]
   const featureCount = categories.reduce((sum, category) => sum + category.items.length, 0)
+  const languageHref = locale === 'en' ? 'zh/' : '../'
   const categoryCards = categories
     .map((category) => {
-      const first = category.items.slice(0, 3).map((item) => item.name).join('、')
-      return `<a href="abilities/${category.slug}/"><strong>${category.title}</strong><span>${category.items.length} 项能力：${escapeHtml(first)}${category.items.length > 3 ? '…' : ''}</span></a>`
+      const first = category.items.slice(0, 3).map((item) => item.name).join(locale === 'en' ? ', ' : '、')
+      const suffix = category.items.length > 3 ? '...' : ''
+      return `<a href="abilities/${category.slug}/"><strong>${category.title}</strong><span>${t.itemCount(category.items.length)}: ${escapeHtml(first)}${suffix}</span></a>`
     })
     .join('\n')
 
@@ -103,22 +129,23 @@ layout: home
 
 hero:
   name: After CSS3
-  text: 新 CSS 能力导航
-  tagline: 从 CSS3 之后的模块化演进里，把可用能力、草案方向、MDN 与 Can I Use 入口整理成一份可查的轻文档。
+  text: ${t.heroText}
+  tagline: ${t.tagline}
   actions:
     - theme: brand
-      text: 浏览能力导航
-      link: /abilities/
+      text: ${t.browse}
+      link: ${localePrefix(locale)}/abilities/
     - theme: alt
-      text: 查看 GitHub
+      text: ${t.github}
       link: https://github.com/CheshireJCat/afterCss3
 ---
 
 <div class="hero-grid">
   <div class="hero-copy">
-    <p>当前迁移 ${categories.length} 个分类、${featureCount} 个能力条目。左侧导航按能力域分组；每个条目页固定包含说明、MDN、demo 和 Can I Use 兼容性入口。</p>
+    <p>${t.intro(categories.length, featureCount)}</p>
     <div class="hero-actions">
-      <a href="abilities/">开始查阅</a>
+      <a href="abilities/">${t.start}</a>
+      <a href="${languageHref}">${t.navLanguage}</a>
       <a href="https://caniuse.com/" target="_blank" rel="noreferrer">Can I Use</a>
       <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank" rel="noreferrer">MDN CSS</a>
     </div>
@@ -130,7 +157,7 @@ hero:
   </div>
 </div>
 
-## 分类索引
+## ${t.categoryIndex}
 
 <div class="category-index">
 ${categoryCards}
@@ -138,76 +165,107 @@ ${categoryCards}
 `
 }
 
-function abilitiesIndexPage() {
+function abilitiesIndexPage(locale, categories) {
+  const t = locales[locale]
   const groups = categories
     .map((category) => {
       const links = category.items
         .slice(0, 8)
         .map((item) => `  - [${item.name}](${category.slug}/${item.slug}.md)`)
         .join('\n')
+
       return `## [${category.title}](${category.slug}/index.md)
 
-共 ${category.items.length} 项。
+${t.total(category.items.length)}
 
 ${links}
-${category.items.length > 8 ? `  - [查看全部 ${category.items.length} 项](${category.slug}/index.md)` : ''}
+${category.items.length > 8 ? `  - [${t.viewAll(category.items.length)}](${category.slug}/index.md)` : ''}
 `
     })
     .join('\n')
 
-  return `# 新 CSS 能力导航
+  return `# ${t.abilitiesTitle}
 
-这里按能力域组织 CSS3 之后的新 CSS 能力。左侧侧边栏是完整导航，正文先给每个分类的快速入口。
+${t.abilitiesIntro}
 
 ${groups}
 `
 }
 
-function sidebarFile() {
-  const groups = [
+function sidebarGroups(locale, categories) {
+  const t = locales[locale]
+  return [
     {
-      text: '总览',
+      text: t.overview,
       items: [
-        { text: '首页', link: '/' },
-        { text: '能力导航', link: '/abilities/' }
+        { text: t.home, link: `${localePrefix(locale)}/` },
+        { text: t.navCapabilities, link: `${localePrefix(locale)}/abilities/` }
       ]
     },
     ...categories.map((category) => ({
       text: category.title,
       collapsed: false,
       items: [
-        { text: '分类概览', link: categoryUrl(category) },
+        { text: t.categoryOverview, link: categoryUrl(locale, category) },
         ...category.items.map((item) => ({
           text: item.name,
-          link: itemUrl(category, item)
+          link: itemUrl(locale, category, item)
         }))
       ]
     }))
   ]
-
-  return `export const sidebar = ${JSON.stringify(groups, null, 2)}\n`
 }
 
-function run() {
-  fs.rmSync(abilitiesDir, { recursive: true, force: true })
-  ensureDir(abilitiesDir)
+function sidebarFile(sidebars) {
+  return `export const enSidebar = ${JSON.stringify(sidebars.en, null, 2)}
 
-  write(path.join(docsDir, 'index.md'), homePage())
-  write(path.join(abilitiesDir, 'index.md'), abilitiesIndexPage())
-  write(sidebarPath, sidebarFile())
+export const zhSidebar = ${JSON.stringify(sidebars.zh, null, 2)}
+`
+}
+
+function cleanGeneratedDocs() {
+  fs.rmSync(path.join(docsDir, 'abilities'), { recursive: true, force: true })
+  fs.rmSync(path.join(docsDir, 'zh'), { recursive: true, force: true })
+}
+
+function writeLocale(locale, categories) {
+  const rootDir = localeRoot(locale)
+  const abilitiesDir = path.join(rootDir, 'abilities')
+
+  ensureDir(abilitiesDir)
+  write(path.join(rootDir, 'index.md'), homePage(locale, categories))
+  write(path.join(abilitiesDir, 'index.md'), abilitiesIndexPage(locale, categories))
 
   for (const category of categories) {
     const categoryDir = path.join(abilitiesDir, category.slug)
-    write(path.join(categoryDir, 'index.md'), categoryPage(category))
+    write(path.join(categoryDir, 'index.md'), categoryPage(locale, category))
     category.items.forEach((item, index) => {
       write(
         path.join(categoryDir, `${item.slug}.md`),
-        featurePage(category, item, index, category.items.length)
+        featurePage(locale, category, item, index, category.items.length)
       )
     })
   }
+}
 
-  console.log(`generated ${categories.length} categories and ${categories.reduce((sum, c) => sum + c.items.length, 0)} feature pages`)
+function run() {
+  cleanGeneratedDocs()
+
+  const localized = Object.fromEntries(
+    localeOrder.map((locale) => [locale, localizeCategories(locale)])
+  )
+
+  for (const locale of localeOrder) {
+    writeLocale(locale, localized[locale])
+  }
+
+  write(sidebarPath, sidebarFile({
+    en: sidebarGroups('en', localized.en),
+    zh: sidebarGroups('zh', localized.zh)
+  }))
+
+  const featureCount = sourceCategories.reduce((sum, c) => sum + c.items.length, 0)
+  console.log(`generated ${localeOrder.length} locales, ${sourceCategories.length} categories, and ${featureCount} feature pages per locale`)
 }
 
 run()

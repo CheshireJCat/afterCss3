@@ -1,35 +1,33 @@
 import { defineConfig } from 'vitepress'
-import { sidebar } from './sidebar.generated'
+import { enSidebar, zhSidebar } from './sidebar.generated'
+import { locales } from '../../scripts/i18n.mjs'
 
-export default defineConfig({
-  title: 'After CSS3',
-  description: 'CSS3 之后的新 CSS 能力导航、说明、Demo 与兼容性入口',
-  lang: 'zh-CN',
-  base: process.env.DOCS_BASE || '/afterCss3/',
-  cleanUrls: true,
-  lastUpdated: true,
-  ignoreDeadLinks: true,
-  themeConfig: {
+function themeConfig(locale: 'en' | 'zh') {
+  const t = locales[locale]
+  const isEnglish = locale === 'en'
+
+  return {
     logo: '/mark.svg',
     search: {
       provider: 'local'
     },
     nav: [
-      { text: '能力导航', link: '/abilities/' },
+      { text: t.navCapabilities, link: isEnglish ? '/abilities/' : '/zh/abilities/' },
+      { text: t.navLanguage, link: isEnglish ? '/zh/' : '/' },
       { text: 'MDN CSS', link: 'https://developer.mozilla.org/en-US/docs/Web/CSS' },
       { text: 'Can I Use', link: 'https://caniuse.com/' }
     ],
-    sidebar,
+    sidebar: isEnglish ? enSidebar : zhSidebar,
     outline: {
       level: [2, 3],
-      label: '本页'
+      label: t.outline
     },
     docFooter: {
-      prev: '上一项',
-      next: '下一项'
+      prev: t.previous,
+      next: t.next
     },
     lastUpdated: {
-      text: '最后更新',
+      text: t.lastUpdated,
       formatOptions: {
         dateStyle: 'medium',
         timeStyle: 'short'
@@ -37,14 +35,38 @@ export default defineConfig({
     },
     editLink: {
       pattern: 'https://github.com/CheshireJCat/afterCss3/edit/main/docs/:path',
-      text: '在 GitHub 编辑此页'
+      text: t.editThisPage
     },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/CheshireJCat/afterCss3' }
     ],
     footer: {
-      message: 'Built with VitePress. Data migrated from the CSS3-after capability document.',
+      message: t.footerMessage,
       copyright: 'MIT'
+    }
+  }
+}
+
+export default defineConfig({
+  title: 'After CSS3',
+  description: locales.en.description,
+  lang: locales.en.lang,
+  base: process.env.DOCS_BASE || '/afterCss3/',
+  cleanUrls: true,
+  lastUpdated: true,
+  ignoreDeadLinks: true,
+  themeConfig: themeConfig('en'),
+  locales: {
+    root: {
+      label: locales.en.label,
+      lang: locales.en.lang,
+      description: locales.en.description
+    },
+    zh: {
+      label: locales.zh.label,
+      lang: locales.zh.lang,
+      description: locales.zh.description,
+      themeConfig: themeConfig('zh')
     }
   },
   markdown: {

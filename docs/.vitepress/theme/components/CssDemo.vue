@@ -5,6 +5,8 @@ const props = defineProps<{
   title: string
   code: string
   note?: string
+  lang?: string
+  badge?: string
 }>()
 
 const srcdoc = computed(() => {
@@ -14,7 +16,7 @@ const srcdoc = computed(() => {
     .replace(/>/g, '&gt;')
 
   return `<!doctype html>
-<html lang="zh-CN">
+<html lang="${props.lang || 'en-US'}">
 <head>
   <meta charset="utf-8">
   <style>
@@ -85,7 +87,7 @@ const srcdoc = computed(() => {
   <section class="css-demo">
     <div class="css-demo__head">
       <h3>{{ title }}</h3>
-      <span>Live-ish</span>
+      <span>{{ badge || 'Live-ish' }}</span>
     </div>
     <iframe :title="`${title} demo`" :srcdoc="srcdoc" loading="lazy" />
     <p v-if="note" class="css-demo__note">{{ note }}</p>
