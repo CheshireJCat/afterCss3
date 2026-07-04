@@ -1,0 +1,16 @@
+html,
+body {
+  margin: 0;
+  background: #070908;
+  font-family:
+    "Avenir Next",
+    "IBM Plex Sans",
+    "Segoe UI",
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
