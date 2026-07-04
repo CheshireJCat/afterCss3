@@ -14,17 +14,24 @@ scripting, update, overflow-block, overflow-inline, display-mode
 
 ## Demo
 
-<CssDemo title="Runtime environment queries" code=".target {
-  /* scripting, update, overflow-block, overflow-inline, display-mode */
-  outline: 3px solid var(--brand);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="Runtime environment queries" css-b64="LyogRmVhdHVyZSBmb2N1czogc2NyaXB0aW5nLCB1cGRhdGUsIG92ZXJmbG93LWJsb2NrLCBvdmVyZmxvdy1pbmxpbmUsIGRpc3BsYXktbW9kZSAqLwouZGVtby1mcmFtZSB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDE2cHg7Cn0KLmRlbW8tdGl0bGUgewogIG1hcmdpbjogMDsKICBmb250LXNpemU6IDEuMzVyZW07CiAgbGluZS1oZWlnaHQ6IDEuMTsKICBsZXR0ZXItc3BhY2luZzogMDsKfQouZGVtby1jb3B5IHsKICBtYXJnaW46IDA7CiAgY29sb3I6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA3MiUsIENhbnZhcyk7CiAgbGluZS1oZWlnaHQ6IDEuNTU7Cn0KLmRlbW8tY2hpcCB7CiAgZGlzcGxheTogaW5saW5lLWZsZXg7CiAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICB3aWR0aDogbWF4LWNvbnRlbnQ7CiAgbWluLWhlaWdodDogMjhweDsKICBwYWRkaW5nOiAwIDEwcHg7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDE4JSwgdHJhbnNwYXJlbnQpOwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA2JSwgQ2FudmFzKTsKICBmb250OiA3MDAgLjc1cmVtLzEgdWktbW9ub3NwYWNlLCBTRk1vbm8tUmVndWxhciwgTWVubG8sIG1vbm9zcGFjZTsKICB0cmFuc2l0aW9uOiAyMjBtcyBlYXNlOwp9Ci5kZW1vLWNhcmQgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxMnB4OwogIHBhZGRpbmc6IDE4cHg7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDE2JSwgdHJhbnNwYXJlbnQpOwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzIDk2JSwgQ2FudmFzVGV4dCk7CiAgYm94LXNoYWRvdzogMCAxOHB4IDQ4cHggY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDEwJSwgdHJhbnNwYXJlbnQpOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tbWVkaWEgewogIG1pbi1oZWlnaHQ6IDkwcHg7CiAgYmFja2dyb3VuZDoKICAgIGxpbmVhci1ncmFkaWVudCgxMzVkZWcsIGNvbG9yLW1peChpbiBva2xjaCwgb2tsY2goNjclIDAuMTUgMTkwKSAyNiUsIENhbnZhcyksIHRyYW5zcGFyZW50KSwKICAgIHJlcGVhdGluZy1saW5lYXItZ3JhZGllbnQoNDVkZWcsIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA4JSwgdHJhbnNwYXJlbnQpIDAgOHB4LCB0cmFuc3BhcmVudCA4cHggMTZweCk7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDEyJSwgdHJhbnNwYXJlbnQpOwp9Ci5kZW1vLWZyYW1lIHsKICBjb250YWluZXI6IGZlYXR1cmUtYXJlYSAvIGlubGluZS1zaXplOwp9Ci5kZW1vLWNhcmQgewogIGdyaWQtdGVtcGxhdGUtY29sdW1uczogMWZyOwp9CkBjb250YWluZXIgZmVhdHVyZS1hcmVhICh3aWR0aCA+IDUyMHB4KSB7CiAgLmRlbW8tY2FyZCB7CiAgICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDE1MHB4IDFmcjsKICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgfQp9Cg==" code-b64="LyogRmVhdHVyZSBmb2N1czogc2NyaXB0aW5nLCB1cGRhdGUsIG92ZXJmbG93LWJsb2NrLCBvdmVyZmxvdy1pbmxpbmUsIGRpc3BsYXktbW9kZSAqLwouZGVtby1mcmFtZSB7CiAgY29udGFpbmVyOiBmZWF0dXJlLWFyZWEgLyBpbmxpbmUtc2l6ZTsKfQouZGVtby1jYXJkIHsKICBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmcjsKfQpAY29udGFpbmVyIGZlYXR1cmUtYXJlYSAod2lkdGggPiA1MjBweCkgewogIC5kZW1vLWNhcmQgewogICAgZ3JpZC10ZW1wbGF0ZS1jb2x1bW5zOiAxNTBweCAxZnI7CiAgICBhbGlnbi1pdGVtczogY2VudGVyOwogIH0KfQ==" html-b64="PGRpdiBjbGFzcz0iZGVtby1jYXJkIj4KICA8ZGl2IGNsYXNzPSJkZW1vLW1lZGlhIj48L2Rpdj4KICA8ZGl2PgogICAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+Y29udGFpbmVyLWF3YXJlPC9zcGFuPgogICAgPGg0IGNsYXNzPSJkZW1vLXRpdGxlIj5Db250YWluZXItYXdhcmUgY2FyZDwvaDQ+CiAgICA8cCBjbGFzcz0iZGVtby1jb3B5Ij5UaGUgc2FtZSBjb21wb25lbnQgYWRqdXN0cyBpdHMgZGVuc2l0eSBpbnNpZGUgZGlmZmVyZW50IHNsb3RzLjwvcD4KICA8L2Rpdj4KPC9kaXY+" caption="When the preview width changes, the component responds to its own container instead of the whole viewport." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Detect scripting, refresh capability, overflow behavior, and PWA display modes.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use Runtime environment queries in reusable components when you need to change a component based on the space it actually receives rather than the viewport width. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A card in a sidebar can stay compact while the same card in the main column shows media, metadata, and actions.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Choose thresholds from component content. A breakpoint that only matches today’s layout grid will feel arbitrary when the component moves.</p>
+</section>
+</div>
 
 ## Source metadata
 

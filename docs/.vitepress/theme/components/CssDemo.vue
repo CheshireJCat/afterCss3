@@ -3,14 +3,33 @@ import { computed } from 'vue'
 
 const props = defineProps<{
   title: string
-  code: string
+  code?: string
+  codeB64?: string
+  css?: string
+  cssB64?: string
+  html?: string
+  htmlB64?: string
   note?: string
+  caption?: string
   lang?: string
   badge?: string
 }>()
 
+function decodeBase64(value?: string) {
+  if (!value) return ''
+
+  const binary = atob(value)
+  const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0))
+  return new TextDecoder().decode(bytes)
+}
+
+const demoCss = computed(() => decodeBase64(props.cssB64) || props.css || props.code || '')
+const displayCode = computed(() => props.code || demoCss.value)
+const demoCode = computed(() => decodeBase64(props.codeB64) || displayCode.value)
+const demoHtml = computed(() => decodeBase64(props.htmlB64) || props.html || '<div class="demo-card"><h4 class="demo-title">Preview</h4><p class="demo-copy">Demo content</p></div>')
+
 const srcdoc = computed(() => {
-  const escapedCode = props.code
+  const escapedCode = demoCss.value
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -24,11 +43,12 @@ const srcdoc = computed(() => {
       color-scheme: light dark;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      min-height: 230px;
-      display: grid;
-      place-items: center;
+      min-height: 320px;
       background:
         linear-gradient(90deg, color-mix(in oklch, CanvasText 7%, transparent) 1px, transparent 1px),
         linear-gradient(0deg, color-mix(in oklch, CanvasText 7%, transparent) 1px, transparent 1px),
@@ -36,46 +56,23 @@ const srcdoc = computed(() => {
       background-size: 24px 24px;
       color: CanvasText;
     }
-    .stage {
-      width: min(520px, calc(100vw - 48px));
-      min-height: 150px;
+    .demo-root {
+      min-height: 320px;
       display: grid;
       place-items: center;
-      gap: 14px;
       padding: 24px;
-      border: 1px solid color-mix(in oklch, CanvasText 16%, transparent);
-      background: color-mix(in oklch, Canvas 92%, CanvasText);
-      box-shadow: 0 20px 60px color-mix(in oklch, CanvasText 12%, transparent);
     }
-    .target {
-      --brand: oklch(60% 0.18 235);
-      width: 132px;
-      min-height: 96px;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      border: 1px solid color-mix(in oklch, var(--brand), black 20%);
-      background: color-mix(in oklch, var(--brand) 18%, Canvas);
-      color: color-mix(in oklch, var(--brand), black 38%);
-      font-weight: 700;
-      text-align: center;
-      transition: 220ms ease;
+    .demo-frame {
+      width: min(680px, calc(100vw - 48px));
     }
-    .target + .target {
-      width: 92px;
-      min-height: 64px;
-      opacity: .78;
-    }
-    .target:hover {
-      transform: translateY(-3px);
-    }
-    ${props.code}
+    ${demoCss.value}
   </style>
 </head>
 <body>
-  <div class="stage">
-    <div class="target">Preview</div>
-    <div class="target">Item</div>
+  <div class="demo-root">
+    <div class="demo-frame">
+${demoHtml.value}
+    </div>
   </div>
   <pre hidden>${escapedCode}</pre>
 </body>
@@ -90,7 +87,7 @@ const srcdoc = computed(() => {
       <span>{{ badge || 'Live-ish' }}</span>
     </div>
     <iframe :title="`${title} demo`" :srcdoc="srcdoc" loading="lazy" />
-    <p v-if="note" class="css-demo__note">{{ note }}</p>
-    <pre><code>{{ code }}</code></pre>
+    <p v-if="caption || note" class="css-demo__note">{{ caption || note }}</p>
+    <pre><code>{{ demoCode }}</code></pre>
   </section>
 </template>

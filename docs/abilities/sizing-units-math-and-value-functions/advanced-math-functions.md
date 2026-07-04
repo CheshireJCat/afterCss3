@@ -14,17 +14,24 @@ round(), mod(), rem(), sin(), cos(), tan(), asin(), acos(), atan(), atan2(), pow
 
 ## Demo
 
-<CssDemo title="Advanced math functions" code=".target {
-  /* round(), mod(), rem(), sin(), cos(), tan(), asin(), acos(), atan(), atan2(), pow(), sqrt(), hypot(), log(), exp(), abs(), sign() */
-  outline: 3px solid var(--brand);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="Advanced math functions" css-b64="LyogRmVhdHVyZSBmb2N1czogcm91bmQoKSwgbW9kKCksIHJlbSgpLCBzaW4oKSwgY29zKCksIHRhbigpLCBhc2luKCksIGFjb3MoKSwgYXRhbigpLCBhdGFuMigpLCBwb3coKSwgc3FydCgpLCBoeXBvdCgpLCBsb2coKSwgZXhwKCksIGFicygpLCBzaWduKCkgKi8KLmRlbW8tZnJhbWUgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxNnB4Owp9Ci5kZW1vLXRpdGxlIHsKICBtYXJnaW46IDA7CiAgZm9udC1zaXplOiAxLjM1cmVtOwogIGxpbmUtaGVpZ2h0OiAxLjE7CiAgbGV0dGVyLXNwYWNpbmc6IDA7Cn0KLmRlbW8tY29weSB7CiAgbWFyZ2luOiAwOwogIGNvbG9yOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNzIlLCBDYW52YXMpOwogIGxpbmUtaGVpZ2h0OiAxLjU1Owp9Ci5kZW1vLWNoaXAgewogIGRpc3BsYXk6IGlubGluZS1mbGV4OwogIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgd2lkdGg6IG1heC1jb250ZW50OwogIG1pbi1oZWlnaHQ6IDI4cHg7CiAgcGFkZGluZzogMCAxMHB4OwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxOCUsIHRyYW5zcGFyZW50KTsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNiUsIENhbnZhcyk7CiAgZm9udDogNzAwIC43NXJlbS8xIHVpLW1vbm9zcGFjZSwgU0ZNb25vLVJlZ3VsYXIsIE1lbmxvLCBtb25vc3BhY2U7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1jYXJkIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTJweDsKICBwYWRkaW5nOiAxOHB4OwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxNiUsIHRyYW5zcGFyZW50KTsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhcyA5NiUsIENhbnZhc1RleHQpOwogIGJveC1zaGFkb3c6IDAgMThweCA0OHB4IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxMCUsIHRyYW5zcGFyZW50KTsKICB0cmFuc2l0aW9uOiAyMjBtcyBlYXNlOwp9Ci5kZW1vLW1lZGlhIHsKICBtaW4taGVpZ2h0OiA5MHB4OwogIGJhY2tncm91bmQ6CiAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBjb2xvci1taXgoaW4gb2tsY2gsIG9rbGNoKDY3JSAwLjE1IDE5MCkgMjYlLCBDYW52YXMpLCB0cmFuc3BhcmVudCksCiAgICByZXBlYXRpbmctbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgOCUsIHRyYW5zcGFyZW50KSAwIDhweCwgdHJhbnNwYXJlbnQgOHB4IDE2cHgpOwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxMiUsIHRyYW5zcGFyZW50KTsKfQouZGVtby1jYXJkIHsKICBpbmxpbmUtc2l6ZTogbWluKDEwMCUsIDU2MHB4KTsKICBwYWRkaW5nOiBjbGFtcCgxNHB4LCA0dncsIDI4cHgpOwp9Ci5kZW1vLXRpdGxlIHsKICBmb250LXNpemU6IGNsYW1wKDEuMjVyZW0sIDZ2dywgMi42cmVtKTsKfQouZGVtby1tZWRpYSB7CiAgYXNwZWN0LXJhdGlvOiAxNiAvIDc7Cn0K" code-b64="LyogRmVhdHVyZSBmb2N1czogcm91bmQoKSwgbW9kKCksIHJlbSgpLCBzaW4oKSwgY29zKCksIHRhbigpLCBhc2luKCksIGFjb3MoKSwgYXRhbigpLCBhdGFuMigpLCBwb3coKSwgc3FydCgpLCBoeXBvdCgpLCBsb2coKSwgZXhwKCksIGFicygpLCBzaWduKCkgKi8KLmRlbW8tY2FyZCB7CiAgaW5saW5lLXNpemU6IG1pbigxMDAlLCA1NjBweCk7CiAgcGFkZGluZzogY2xhbXAoMTRweCwgNHZ3LCAyOHB4KTsKfQouZGVtby10aXRsZSB7CiAgZm9udC1zaXplOiBjbGFtcCgxLjI1cmVtLCA2dncsIDIuNnJlbSk7Cn0KLmRlbW8tbWVkaWEgewogIGFzcGVjdC1yYXRpbzogMTYgLyA3Owp9" html-b64="PGRpdiBjbGFzcz0iZGVtby1jYXJkIj4KICA8ZGl2IGNsYXNzPSJkZW1vLW1lZGlhIj48L2Rpdj4KICA8c3BhbiBjbGFzcz0iZGVtby1jaGlwIj5mbHVpZCBzaXppbmc8L3NwYW4+CiAgPGg0IGNsYXNzPSJkZW1vLXRpdGxlIj5GbHVpZCBtZXRyaWMgY2FyZDwvaDQ+CiAgPHAgY2xhc3M9ImRlbW8tY29weSI+VHlwZSwgcmF0aW8sIGFuZCBpbnRlcm5hbCBzcGFjZSBmb2xsb3cgdGhlIGF2YWlsYWJsZSByb29tLjwvcD4KPC9kaXY+" caption="This example lets size relationships come from CSS constraints instead of a fixed pixel value." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Use native grid math, trigonometry, exponentials, rounding, and sign checks.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use Advanced math functions in complex layout when you need to express alignment, wrapping, and order as layout rules instead of extra wrapper markup. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A settings page can align every nested control row while a responsive gallery chooses the right packing behavior.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Layout features can change reading and focus order indirectly. Check the experience with keyboard navigation, not only screenshots.</p>
+</section>
+</div>
 
 ## Source metadata
 

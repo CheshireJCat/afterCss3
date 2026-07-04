@@ -67,6 +67,7 @@ npm run docs:preview
 |   |-- zh/                     # 生成的简体中文站点
 |   `-- index.md                # 生成的英文首页
 |-- scripts/
+|   |-- content-enhancements.mjs # 实用场景说明和 Demo 场景
 |   |-- i18n.mjs                # 语言文案和能力翻译
 |   `-- generate-docs.mjs       # 数据到 Markdown 的生成器
 `-- .github/workflows/
@@ -84,7 +85,7 @@ npm run docs:preview
 - `status`：成熟度或规范状态。
 - `mdn`：MDN 参考链接或搜索入口。
 - `caniuse`：Can I Use 兼容性链接或搜索入口。
-- `demo`：Demo 组件使用的 CSS 片段。
+- `demo`：迁移来源中的 CSS 片段，作为能力元数据保留。
 
 修改数据后运行：
 
@@ -92,7 +93,7 @@ npm run docs:preview
 npm run docs:generate
 ```
 
-英文显示名、摘要和界面文案位于 `scripts/i18n.mjs`。新增或重命名能力时，也需要同步更新 i18n 映射，确保默认英文站点完整。
+英文显示名、摘要和界面文案位于 `scripts/i18n.mjs`。实用的“什么时候用”说明和 Demo 场景位于 `scripts/content-enhancements.mjs`。新增或重命名能力时，也需要同步更新这两个文件，确保默认英文站点、中文站点和实践示例都完整。
 
 ## 部署
 

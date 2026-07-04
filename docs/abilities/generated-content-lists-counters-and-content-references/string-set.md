@@ -14,18 +14,24 @@ string-set: chapter content(text);
 
 ## Demo
 
-<CssDemo title="string-set" code=".target {
-  width: 220px;
-  text-wrap: balance;
-  font-size: clamp(18px, 4vw, 34px);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="string-set" css-b64="LyogRmVhdHVyZSBmb2N1czogc3RyaW5nLXNldDogY2hhcHRlciBjb250ZW50KHRleHQpOyAqLwouZGVtby1mcmFtZSB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDE2cHg7Cn0KLmRlbW8tdGl0bGUgewogIG1hcmdpbjogMDsKICBmb250LXNpemU6IDEuMzVyZW07CiAgbGluZS1oZWlnaHQ6IDEuMTsKICBsZXR0ZXItc3BhY2luZzogMDsKfQouZGVtby1jb3B5IHsKICBtYXJnaW46IDA7CiAgY29sb3I6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA3MiUsIENhbnZhcyk7CiAgbGluZS1oZWlnaHQ6IDEuNTU7Cn0KLmRlbW8tY2hpcCB7CiAgZGlzcGxheTogaW5saW5lLWZsZXg7CiAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICB3aWR0aDogbWF4LWNvbnRlbnQ7CiAgbWluLWhlaWdodDogMjhweDsKICBwYWRkaW5nOiAwIDEwcHg7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDE4JSwgdHJhbnNwYXJlbnQpOwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA2JSwgQ2FudmFzKTsKICBmb250OiA3MDAgLjc1cmVtLzEgdWktbW9ub3NwYWNlLCBTRk1vbm8tUmVndWxhciwgTWVubG8sIG1vbm9zcGFjZTsKICB0cmFuc2l0aW9uOiAyMjBtcyBlYXNlOwp9Ci5kZW1vLWNhcmQgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxMnB4OwogIHBhZGRpbmc6IDE4cHg7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDE2JSwgdHJhbnNwYXJlbnQpOwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzIDk2JSwgQ2FudmFzVGV4dCk7CiAgYm94LXNoYWRvdzogMCAxOHB4IDQ4cHggY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDEwJSwgdHJhbnNwYXJlbnQpOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tbWVkaWEgewogIG1pbi1oZWlnaHQ6IDkwcHg7CiAgYmFja2dyb3VuZDoKICAgIGxpbmVhci1ncmFkaWVudCgxMzVkZWcsIGNvbG9yLW1peChpbiBva2xjaCwgb2tsY2goNjclIDAuMTUgMTkwKSAyNiUsIENhbnZhcyksIHRyYW5zcGFyZW50KSwKICAgIHJlcGVhdGluZy1saW5lYXItZ3JhZGllbnQoNDVkZWcsIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA4JSwgdHJhbnNwYXJlbnQpIDAgOHB4LCB0cmFuc3BhcmVudCA4cHggMTZweCk7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDEyJSwgdHJhbnNwYXJlbnQpOwp9Ci5kZW1vLWxpc3QgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxMHB4OwogIG1hcmdpbjogMDsKICBwYWRkaW5nLWlubGluZS1zdGFydDogMnJlbTsKICBjb3VudGVyLXJlc2V0OiBzdGVwczsKfQouZGVtby1saXN0IGxpIHsKICBwYWRkaW5nOiA4cHggMTBweDsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNSUsIENhbnZhcyk7Cn0KLmRlbW8tbGlzdCBsaTo6bWFya2VyIHsKICBjb2xvcjogb2tsY2goNTglIDAuMTcgMzYpOwogIGZvbnQtd2VpZ2h0OiA4MDA7Cn0K" code-b64="LyogRmVhdHVyZSBmb2N1czogc3RyaW5nLXNldDogY2hhcHRlciBjb250ZW50KHRleHQpOyAqLwouZGVtby1saXN0IHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTBweDsKICBtYXJnaW46IDA7CiAgcGFkZGluZy1pbmxpbmUtc3RhcnQ6IDJyZW07CiAgY291bnRlci1yZXNldDogc3RlcHM7Cn0KLmRlbW8tbGlzdCBsaSB7CiAgcGFkZGluZzogOHB4IDEwcHg7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDUlLCBDYW52YXMpOwp9Ci5kZW1vLWxpc3QgbGk6Om1hcmtlciB7CiAgY29sb3I6IG9rbGNoKDU4JSAwLjE3IDM2KTsKICBmb250LXdlaWdodDogODAwOwp9" html-b64="PGRpdiBjbGFzcz0iZGVtby1jYXJkIj4KICA8c3BhbiBjbGFzcz0iZGVtby1jaGlwIj5zdHJ1Y3R1cmVkIGxhYmVsczwvc3Bhbj4KICA8aDQgY2xhc3M9ImRlbW8tdGl0bGUiPlB1Ymxpc2hpbmcgc3RlcHM8L2g0PgogIDxvbCBjbGFzcz0iZGVtby1saXN0Ij4KICAgIDxsaT5Db2xsZWN0IHNvdXJjZXM8L2xpPgogICAgPGxpPkdlbmVyYXRlIGNvbnRlbnRzPC9saT4KICAgIDxsaT5FeHBvcnQgUERGPC9saT4KICA8L29sPgo8L2Rpdj4=" caption="The demo shows numbering and markers staying tied to document structure instead of being typed by hand." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Capture content as page-header or table-of-contents strings.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use string-set in reading and editorial UI when you need to protect readability when copy length, language, or font metrics vary. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A bilingual card can balance the heading, clamp the summary, and keep inline annotations readable in a narrow column.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Always test with real content extremes: long product names, mixed scripts, missing glyphs, and translated copy.</p>
+</section>
+</div>
 
 ## Source metadata
 

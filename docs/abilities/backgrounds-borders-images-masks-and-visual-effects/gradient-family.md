@@ -14,17 +14,24 @@ linear-gradient, radial-gradient, conic-gradient, repeating-*
 
 ## Demo
 
-<CssDemo title="Gradient family" code=".target {
-  /* linear-gradient, radial-gradient, conic-gradient, repeating-* */
-  outline: 3px solid var(--brand);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="Gradient family" css-b64="LyogRmVhdHVyZSBmb2N1czogbGluZWFyLWdyYWRpZW50LCByYWRpYWwtZ3JhZGllbnQsIGNvbmljLWdyYWRpZW50LCByZXBlYXRpbmctKiAqLwouZGVtby1mcmFtZSB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDE2cHg7Cn0KLmRlbW8tdGl0bGUgewogIG1hcmdpbjogMDsKICBmb250LXNpemU6IDEuMzVyZW07CiAgbGluZS1oZWlnaHQ6IDEuMTsKICBsZXR0ZXItc3BhY2luZzogMDsKfQouZGVtby1jb3B5IHsKICBtYXJnaW46IDA7CiAgY29sb3I6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA3MiUsIENhbnZhcyk7CiAgbGluZS1oZWlnaHQ6IDEuNTU7Cn0KLmRlbW8tY2hpcCB7CiAgZGlzcGxheTogaW5saW5lLWZsZXg7CiAgYWxpZ24taXRlbXM6IGNlbnRlcjsKICB3aWR0aDogbWF4LWNvbnRlbnQ7CiAgbWluLWhlaWdodDogMjhweDsKICBwYWRkaW5nOiAwIDEwcHg7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDE4JSwgdHJhbnNwYXJlbnQpOwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA2JSwgQ2FudmFzKTsKICBmb250OiA3MDAgLjc1cmVtLzEgdWktbW9ub3NwYWNlLCBTRk1vbm8tUmVndWxhciwgTWVubG8sIG1vbm9zcGFjZTsKICB0cmFuc2l0aW9uOiAyMjBtcyBlYXNlOwp9Ci5kZW1vLWNhcmQgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxMnB4OwogIHBhZGRpbmc6IDE4cHg7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDE2JSwgdHJhbnNwYXJlbnQpOwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzIDk2JSwgQ2FudmFzVGV4dCk7CiAgYm94LXNoYWRvdzogMCAxOHB4IDQ4cHggY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDEwJSwgdHJhbnNwYXJlbnQpOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tbWVkaWEgewogIG1pbi1oZWlnaHQ6IDkwcHg7CiAgYmFja2dyb3VuZDoKICAgIGxpbmVhci1ncmFkaWVudCgxMzVkZWcsIGNvbG9yLW1peChpbiBva2xjaCwgb2tsY2goNjclIDAuMTUgMTkwKSAyNiUsIENhbnZhcyksIHRyYW5zcGFyZW50KSwKICAgIHJlcGVhdGluZy1saW5lYXItZ3JhZGllbnQoNDVkZWcsIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA4JSwgdHJhbnNwYXJlbnQpIDAgOHB4LCB0cmFuc3BhcmVudCA4cHggMTZweCk7CiAgYm9yZGVyOiAxcHggc29saWQgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDEyJSwgdHJhbnNwYXJlbnQpOwp9Ci5kZW1vLW1lZGlhIHsKICBtaW4taGVpZ2h0OiAxNTBweDsKICBiYWNrZ3JvdW5kOgogICAgcmFkaWFsLWdyYWRpZW50KGNpcmNsZSBhdCAyOCUgMjglLCBva2xjaCg3NSUgMC4xNiA2NSksIHRyYW5zcGFyZW50IDMwJSksCiAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBva2xjaCg1OCUgMC4xNyAyMTApLCBva2xjaCg0MiUgMC4xMiAyODUpKTsKICBmaWx0ZXI6IHNhdHVyYXRlKDEuMTUpIGNvbnRyYXN0KDEuMDUpOwp9Ci5kZW1vLWNhcmQ6aG92ZXIgLmRlbW8tbWVkaWEgewogIGNsaXAtcGF0aDogaW5zZXQoNnB4IHJvdW5kIDE4cHgpOwp9Cg==" code-b64="LyogRmVhdHVyZSBmb2N1czogbGluZWFyLWdyYWRpZW50LCByYWRpYWwtZ3JhZGllbnQsIGNvbmljLWdyYWRpZW50LCByZXBlYXRpbmctKiAqLwouZGVtby1tZWRpYSB7CiAgbWluLWhlaWdodDogMTUwcHg7CiAgYmFja2dyb3VuZDoKICAgIHJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgMjglIDI4JSwgb2tsY2goNzUlIDAuMTYgNjUpLCB0cmFuc3BhcmVudCAzMCUpLAogICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgb2tsY2goNTglIDAuMTcgMjEwKSwgb2tsY2goNDIlIDAuMTIgMjg1KSk7CiAgZmlsdGVyOiBzYXR1cmF0ZSgxLjE1KSBjb250cmFzdCgxLjA1KTsKfQouZGVtby1jYXJkOmhvdmVyIC5kZW1vLW1lZGlhIHsKICBjbGlwLXBhdGg6IGluc2V0KDZweCByb3VuZCAxOHB4KTsKfQ==" html-b64="PGFydGljbGUgY2xhc3M9ImRlbW8tY2FyZCI+CiAgPGRpdiBjbGFzcz0iZGVtby1tZWRpYSI+PC9kaXY+CiAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+dmlzdWFsIGxheWVyPC9zcGFuPgogIDxoNCBjbGFzcz0iZGVtby10aXRsZSI+TWVkaWEgY2FyZCB0cmVhdG1lbnQ8L2g0PgogIDxwIGNsYXNzPSJkZW1vLWNvcHkiPkNyb3BwaW5nLCBtYXNrcywgYmxlbmRpbmcsIGFuZCBmaWx0ZXJzIGNhbiBkaXJlY3RseSBzZXJ2ZSBjb21wb25lbnQgc3RhdGVzLjwvcD4KPC9hcnRpY2xlPg==" caption="The visual feature is placed on a media card so the effect on cropping, color, and hierarchy is visible immediately." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Create linear, radial, and conic gradients without images.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use Gradient family in reading and editorial UI when you need to protect readability when copy length, language, or font metrics vary. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A bilingual card can balance the heading, clamp the summary, and keep inline annotations readable in a narrow column.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Always test with real content extremes: long product names, mixed scripts, missing glyphs, and translated copy.</p>
+</section>
+</div>
 
 ## Source metadata
 

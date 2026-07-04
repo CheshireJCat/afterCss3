@@ -14,17 +14,24 @@ filter: blur(8px) saturate(120%); backdrop-filter: blur(12px);
 
 ## Demo
 
-<CssDemo title="filters" code=".target {
-  /* filter: blur(8px) saturate(120%); backdrop-filter: blur(12px); */
-  outline: 3px solid var(--brand);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="filters" css-b64="LyogRmVhdHVyZSBmb2N1czogZmlsdGVyOiBibHVyKDhweCkgc2F0dXJhdGUoMTIwJSk7IGJhY2tkcm9wLWZpbHRlcjogYmx1cigxMnB4KTsgKi8KLmRlbW8tZnJhbWUgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxNnB4Owp9Ci5kZW1vLXRpdGxlIHsKICBtYXJnaW46IDA7CiAgZm9udC1zaXplOiAxLjM1cmVtOwogIGxpbmUtaGVpZ2h0OiAxLjE7CiAgbGV0dGVyLXNwYWNpbmc6IDA7Cn0KLmRlbW8tY29weSB7CiAgbWFyZ2luOiAwOwogIGNvbG9yOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNzIlLCBDYW52YXMpOwogIGxpbmUtaGVpZ2h0OiAxLjU1Owp9Ci5kZW1vLWNoaXAgewogIGRpc3BsYXk6IGlubGluZS1mbGV4OwogIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgd2lkdGg6IG1heC1jb250ZW50OwogIG1pbi1oZWlnaHQ6IDI4cHg7CiAgcGFkZGluZzogMCAxMHB4OwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxOCUsIHRyYW5zcGFyZW50KTsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNiUsIENhbnZhcyk7CiAgZm9udDogNzAwIC43NXJlbS8xIHVpLW1vbm9zcGFjZSwgU0ZNb25vLVJlZ3VsYXIsIE1lbmxvLCBtb25vc3BhY2U7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1jYXJkIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTJweDsKICBwYWRkaW5nOiAxOHB4OwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxNiUsIHRyYW5zcGFyZW50KTsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhcyA5NiUsIENhbnZhc1RleHQpOwogIGJveC1zaGFkb3c6IDAgMThweCA0OHB4IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxMCUsIHRyYW5zcGFyZW50KTsKICB0cmFuc2l0aW9uOiAyMjBtcyBlYXNlOwp9Ci5kZW1vLW1lZGlhIHsKICBtaW4taGVpZ2h0OiA5MHB4OwogIGJhY2tncm91bmQ6CiAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBjb2xvci1taXgoaW4gb2tsY2gsIG9rbGNoKDY3JSAwLjE1IDE5MCkgMjYlLCBDYW52YXMpLCB0cmFuc3BhcmVudCksCiAgICByZXBlYXRpbmctbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgOCUsIHRyYW5zcGFyZW50KSAwIDhweCwgdHJhbnNwYXJlbnQgOHB4IDE2cHgpOwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxMiUsIHRyYW5zcGFyZW50KTsKfQouZGVtby1tZWRpYSB7CiAgbWluLWhlaWdodDogMTUwcHg7CiAgYmFja2dyb3VuZDoKICAgIHJhZGlhbC1ncmFkaWVudChjaXJjbGUgYXQgMjglIDI4JSwgb2tsY2goNzUlIDAuMTYgNjUpLCB0cmFuc3BhcmVudCAzMCUpLAogICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgb2tsY2goNTglIDAuMTcgMjEwKSwgb2tsY2goNDIlIDAuMTIgMjg1KSk7CiAgZmlsdGVyOiBzYXR1cmF0ZSgxLjE1KSBjb250cmFzdCgxLjA1KTsKfQouZGVtby1jYXJkOmhvdmVyIC5kZW1vLW1lZGlhIHsKICBjbGlwLXBhdGg6IGluc2V0KDZweCByb3VuZCAxOHB4KTsKfQo=" code-b64="LyogRmVhdHVyZSBmb2N1czogZmlsdGVyOiBibHVyKDhweCkgc2F0dXJhdGUoMTIwJSk7IGJhY2tkcm9wLWZpbHRlcjogYmx1cigxMnB4KTsgKi8KLmRlbW8tbWVkaWEgewogIG1pbi1oZWlnaHQ6IDE1MHB4OwogIGJhY2tncm91bmQ6CiAgICByYWRpYWwtZ3JhZGllbnQoY2lyY2xlIGF0IDI4JSAyOCUsIG9rbGNoKDc1JSAwLjE2IDY1KSwgdHJhbnNwYXJlbnQgMzAlKSwKICAgIGxpbmVhci1ncmFkaWVudCgxMzVkZWcsIG9rbGNoKDU4JSAwLjE3IDIxMCksIG9rbGNoKDQyJSAwLjEyIDI4NSkpOwogIGZpbHRlcjogc2F0dXJhdGUoMS4xNSkgY29udHJhc3QoMS4wNSk7Cn0KLmRlbW8tY2FyZDpob3ZlciAuZGVtby1tZWRpYSB7CiAgY2xpcC1wYXRoOiBpbnNldCg2cHggcm91bmQgMThweCk7Cn0=" html-b64="PGFydGljbGUgY2xhc3M9ImRlbW8tY2FyZCI+CiAgPGRpdiBjbGFzcz0iZGVtby1tZWRpYSI+PC9kaXY+CiAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+dmlzdWFsIGxheWVyPC9zcGFuPgogIDxoNCBjbGFzcz0iZGVtby10aXRsZSI+TWVkaWEgY2FyZCB0cmVhdG1lbnQ8L2g0PgogIDxwIGNsYXNzPSJkZW1vLWNvcHkiPkNyb3BwaW5nLCBtYXNrcywgYmxlbmRpbmcsIGFuZCBmaWx0ZXJzIGNhbiBkaXJlY3RseSBzZXJ2ZSBjb21wb25lbnQgc3RhdGVzLjwvcD4KPC9hcnRpY2xlPg==" caption="The visual feature is placed on a media card so the effect on cropping, color, and hierarchy is visible immediately." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Apply post-processing effects to elements or background layers.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use filters in design systems and component libraries when you need to make styling decisions reusable, typed, scoped, or easier to override. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A theme package can expose tokens, register animatable values, and keep reset, framework, and component rules from fighting over specificity.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>These features shape the authoring model. Document the ownership rules so later contributors know where a token, layer, or scoped rule belongs.</p>
+</section>
+</div>
 
 ## Source metadata
 

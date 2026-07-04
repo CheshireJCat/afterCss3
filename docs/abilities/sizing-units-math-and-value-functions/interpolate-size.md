@@ -14,17 +14,24 @@ interpolate-size: allow-keywords;
 
 ## Demo
 
-<CssDemo title="interpolate-size" code=".target {
-  /* interpolate-size: allow-keywords; */
-  outline: 3px solid var(--brand);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="interpolate-size" css-b64="LyogRmVhdHVyZSBmb2N1czogaW50ZXJwb2xhdGUtc2l6ZTogYWxsb3cta2V5d29yZHM7ICovCi5kZW1vLWZyYW1lIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTZweDsKfQouZGVtby10aXRsZSB7CiAgbWFyZ2luOiAwOwogIGZvbnQtc2l6ZTogMS4zNXJlbTsKICBsaW5lLWhlaWdodDogMS4xOwogIGxldHRlci1zcGFjaW5nOiAwOwp9Ci5kZW1vLWNvcHkgewogIG1hcmdpbjogMDsKICBjb2xvcjogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDcyJSwgQ2FudmFzKTsKICBsaW5lLWhlaWdodDogMS41NTsKfQouZGVtby1jaGlwIHsKICBkaXNwbGF5OiBpbmxpbmUtZmxleDsKICBhbGlnbi1pdGVtczogY2VudGVyOwogIHdpZHRoOiBtYXgtY29udGVudDsKICBtaW4taGVpZ2h0OiAyOHB4OwogIHBhZGRpbmc6IDAgMTBweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTglLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDYlLCBDYW52YXMpOwogIGZvbnQ6IDcwMCAuNzVyZW0vMSB1aS1tb25vc3BhY2UsIFNGTW9uby1SZWd1bGFyLCBNZW5sbywgbW9ub3NwYWNlOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tY2FyZCB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDEycHg7CiAgcGFkZGluZzogMThweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTYlLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXMgOTYlLCBDYW52YXNUZXh0KTsKICBib3gtc2hhZG93OiAwIDE4cHggNDhweCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTAlLCB0cmFuc3BhcmVudCk7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1tZWRpYSB7CiAgbWluLWhlaWdodDogOTBweDsKICBiYWNrZ3JvdW5kOgogICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBva2xjaCg2NyUgMC4xNSAxOTApIDI2JSwgQ2FudmFzKSwgdHJhbnNwYXJlbnQpLAogICAgcmVwZWF0aW5nLWxpbmVhci1ncmFkaWVudCg0NWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDglLCB0cmFuc3BhcmVudCkgMCA4cHgsIHRyYW5zcGFyZW50IDhweCAxNnB4KTsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTIlLCB0cmFuc3BhcmVudCk7Cn0KLmRlbW8tY2FyZCB7CiAgaW5saW5lLXNpemU6IG1pbigxMDAlLCA1NjBweCk7CiAgcGFkZGluZzogY2xhbXAoMTRweCwgNHZ3LCAyOHB4KTsKfQouZGVtby10aXRsZSB7CiAgZm9udC1zaXplOiBjbGFtcCgxLjI1cmVtLCA2dncsIDIuNnJlbSk7Cn0KLmRlbW8tbWVkaWEgewogIGFzcGVjdC1yYXRpbzogMTYgLyA3Owp9Cg==" code-b64="LyogRmVhdHVyZSBmb2N1czogaW50ZXJwb2xhdGUtc2l6ZTogYWxsb3cta2V5d29yZHM7ICovCi5kZW1vLWNhcmQgewogIGlubGluZS1zaXplOiBtaW4oMTAwJSwgNTYwcHgpOwogIHBhZGRpbmc6IGNsYW1wKDE0cHgsIDR2dywgMjhweCk7Cn0KLmRlbW8tdGl0bGUgewogIGZvbnQtc2l6ZTogY2xhbXAoMS4yNXJlbSwgNnZ3LCAyLjZyZW0pOwp9Ci5kZW1vLW1lZGlhIHsKICBhc3BlY3QtcmF0aW86IDE2IC8gNzsKfQ==" html-b64="PGRpdiBjbGFzcz0iZGVtby1jYXJkIj4KICA8ZGl2IGNsYXNzPSJkZW1vLW1lZGlhIj48L2Rpdj4KICA8c3BhbiBjbGFzcz0iZGVtby1jaGlwIj5mbHVpZCBzaXppbmc8L3NwYW4+CiAgPGg0IGNsYXNzPSJkZW1vLXRpdGxlIj5GbHVpZCBtZXRyaWMgY2FyZDwvaDQ+CiAgPHAgY2xhc3M9ImRlbW8tY29weSI+VHlwZSwgcmF0aW8sIGFuZCBpbnRlcm5hbCBzcGFjZSBmb2xsb3cgdGhlIGF2YWlsYWJsZSByb29tLjwvcD4KPC9kaXY+" caption="This example lets size relationships come from CSS constraints instead of a fixed pixel value." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Allow intrinsic sizes such as auto and min-content to animate.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use interpolate-size in document structure when you need to derive labels, numbering, and references from the document instead of keeping them in sync by hand. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A checklist can number nested requirements and a generated table of contents can reflect the current heading structure.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Generated labels are not a substitute for source content. If users need to search, copy, or translate it, put it in the document.</p>
+</section>
+</div>
 
 ## Source metadata
 

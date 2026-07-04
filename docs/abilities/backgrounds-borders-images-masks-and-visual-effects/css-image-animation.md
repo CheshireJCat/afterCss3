@@ -14,15 +14,24 @@ image animation controls
 
 ## Demo
 
-<CssDemo title="CSS Image Animation" code=".target { animation: pulse 1.8s ease-in-out infinite alternate; }
-@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="CSS Image Animation" css-b64="LyogRmVhdHVyZSBmb2N1czogaW1hZ2UgYW5pbWF0aW9uIGNvbnRyb2xzICovCi5kZW1vLWZyYW1lIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTZweDsKfQouZGVtby10aXRsZSB7CiAgbWFyZ2luOiAwOwogIGZvbnQtc2l6ZTogMS4zNXJlbTsKICBsaW5lLWhlaWdodDogMS4xOwogIGxldHRlci1zcGFjaW5nOiAwOwp9Ci5kZW1vLWNvcHkgewogIG1hcmdpbjogMDsKICBjb2xvcjogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDcyJSwgQ2FudmFzKTsKICBsaW5lLWhlaWdodDogMS41NTsKfQouZGVtby1jaGlwIHsKICBkaXNwbGF5OiBpbmxpbmUtZmxleDsKICBhbGlnbi1pdGVtczogY2VudGVyOwogIHdpZHRoOiBtYXgtY29udGVudDsKICBtaW4taGVpZ2h0OiAyOHB4OwogIHBhZGRpbmc6IDAgMTBweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTglLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDYlLCBDYW52YXMpOwogIGZvbnQ6IDcwMCAuNzVyZW0vMSB1aS1tb25vc3BhY2UsIFNGTW9uby1SZWd1bGFyLCBNZW5sbywgbW9ub3NwYWNlOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tY2FyZCB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDEycHg7CiAgcGFkZGluZzogMThweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTYlLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXMgOTYlLCBDYW52YXNUZXh0KTsKICBib3gtc2hhZG93OiAwIDE4cHggNDhweCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTAlLCB0cmFuc3BhcmVudCk7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1tZWRpYSB7CiAgbWluLWhlaWdodDogOTBweDsKICBiYWNrZ3JvdW5kOgogICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBva2xjaCg2NyUgMC4xNSAxOTApIDI2JSwgQ2FudmFzKSwgdHJhbnNwYXJlbnQpLAogICAgcmVwZWF0aW5nLWxpbmVhci1ncmFkaWVudCg0NWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDglLCB0cmFuc3BhcmVudCkgMCA4cHgsIHRyYW5zcGFyZW50IDhweCAxNnB4KTsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTIlLCB0cmFuc3BhcmVudCk7Cn0KLmRlbW8tbWVkaWEgewogIG1pbi1oZWlnaHQ6IDE1MHB4OwogIGJhY2tncm91bmQ6CiAgICByYWRpYWwtZ3JhZGllbnQoY2lyY2xlIGF0IDI4JSAyOCUsIG9rbGNoKDc1JSAwLjE2IDY1KSwgdHJhbnNwYXJlbnQgMzAlKSwKICAgIGxpbmVhci1ncmFkaWVudCgxMzVkZWcsIG9rbGNoKDU4JSAwLjE3IDIxMCksIG9rbGNoKDQyJSAwLjEyIDI4NSkpOwogIGZpbHRlcjogc2F0dXJhdGUoMS4xNSkgY29udHJhc3QoMS4wNSk7Cn0KLmRlbW8tY2FyZDpob3ZlciAuZGVtby1tZWRpYSB7CiAgY2xpcC1wYXRoOiBpbnNldCg2cHggcm91bmQgMThweCk7Cn0K" code-b64="LyogRmVhdHVyZSBmb2N1czogaW1hZ2UgYW5pbWF0aW9uIGNvbnRyb2xzICovCi5kZW1vLW1lZGlhIHsKICBtaW4taGVpZ2h0OiAxNTBweDsKICBiYWNrZ3JvdW5kOgogICAgcmFkaWFsLWdyYWRpZW50KGNpcmNsZSBhdCAyOCUgMjglLCBva2xjaCg3NSUgMC4xNiA2NSksIHRyYW5zcGFyZW50IDMwJSksCiAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBva2xjaCg1OCUgMC4xNyAyMTApLCBva2xjaCg0MiUgMC4xMiAyODUpKTsKICBmaWx0ZXI6IHNhdHVyYXRlKDEuMTUpIGNvbnRyYXN0KDEuMDUpOwp9Ci5kZW1vLWNhcmQ6aG92ZXIgLmRlbW8tbWVkaWEgewogIGNsaXAtcGF0aDogaW5zZXQoNnB4IHJvdW5kIDE4cHgpOwp9" html-b64="PGFydGljbGUgY2xhc3M9ImRlbW8tY2FyZCI+CiAgPGRpdiBjbGFzcz0iZGVtby1tZWRpYSI+PC9kaXY+CiAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+dmlzdWFsIGxheWVyPC9zcGFuPgogIDxoNCBjbGFzcz0iZGVtby10aXRsZSI+TWVkaWEgY2FyZCB0cmVhdG1lbnQ8L2g0PgogIDxwIGNsYXNzPSJkZW1vLWNvcHkiPkNyb3BwaW5nLCBtYXNrcywgYmxlbmRpbmcsIGFuZCBmaWx0ZXJzIGNhbiBkaXJlY3RseSBzZXJ2ZSBjb21wb25lbnQgc3RhdGVzLjwvcD4KPC9hcnRpY2xlPg==" caption="The visual feature is placed on a media card so the effect on cropping, color, and hierarchy is visible immediately." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Control animated image playback, first frames, and related behavior.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use CSS Image Animation in interaction feedback when you need to make a state change legible through movement, timing, or continuity. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A selected card can lift, move, or cross-fade into a detail view so the user understands the relationship between states.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>CSS Image Animation should not be a hard dependency yet. Treat it as progressive enhancement: ship the baseline experience first, then add this capability behind feature detection or local fallbacks.</p>
+</section>
+</div>
 
 ## Source metadata
 

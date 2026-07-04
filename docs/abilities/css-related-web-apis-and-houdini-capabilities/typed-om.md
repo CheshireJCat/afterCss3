@@ -14,17 +14,24 @@ CSSUnitValue, StylePropertyMap
 
 ## Demo
 
-<CssDemo title="Typed OM" code=".target {
-  /* CSSUnitValue, StylePropertyMap */
-  outline: 3px solid var(--brand);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="Typed OM" css-b64="LyogRmVhdHVyZSBmb2N1czogQ1NTVW5pdFZhbHVlLCBTdHlsZVByb3BlcnR5TWFwICovCi5kZW1vLWZyYW1lIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTZweDsKfQouZGVtby10aXRsZSB7CiAgbWFyZ2luOiAwOwogIGZvbnQtc2l6ZTogMS4zNXJlbTsKICBsaW5lLWhlaWdodDogMS4xOwogIGxldHRlci1zcGFjaW5nOiAwOwp9Ci5kZW1vLWNvcHkgewogIG1hcmdpbjogMDsKICBjb2xvcjogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDcyJSwgQ2FudmFzKTsKICBsaW5lLWhlaWdodDogMS41NTsKfQouZGVtby1jaGlwIHsKICBkaXNwbGF5OiBpbmxpbmUtZmxleDsKICBhbGlnbi1pdGVtczogY2VudGVyOwogIHdpZHRoOiBtYXgtY29udGVudDsKICBtaW4taGVpZ2h0OiAyOHB4OwogIHBhZGRpbmc6IDAgMTBweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTglLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDYlLCBDYW52YXMpOwogIGZvbnQ6IDcwMCAuNzVyZW0vMSB1aS1tb25vc3BhY2UsIFNGTW9uby1SZWd1bGFyLCBNZW5sbywgbW9ub3NwYWNlOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tY2FyZCB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDEycHg7CiAgcGFkZGluZzogMThweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTYlLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXMgOTYlLCBDYW52YXNUZXh0KTsKICBib3gtc2hhZG93OiAwIDE4cHggNDhweCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTAlLCB0cmFuc3BhcmVudCk7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1tZWRpYSB7CiAgbWluLWhlaWdodDogOTBweDsKICBiYWNrZ3JvdW5kOgogICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBva2xjaCg2NyUgMC4xNSAxOTApIDI2JSwgQ2FudmFzKSwgdHJhbnNwYXJlbnQpLAogICAgcmVwZWF0aW5nLWxpbmVhci1ncmFkaWVudCg0NWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDglLCB0cmFuc3BhcmVudCkgMCA4cHgsIHRyYW5zcGFyZW50IDhweCAxNnB4KTsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTIlLCB0cmFuc3BhcmVudCk7Cn0KLmFwaS1wYW5lbCB7CiAgYm9yZGVyLXN0eWxlOiBkYXNoZWQ7Cn0KLmFwaS1tZXRlciB7CiAgZGlzcGxheTogYmxvY2s7CiAgcGFkZGluZzogMTJweDsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgOCUsIENhbnZhcyk7CiAgY29sb3I6IG9rbGNoKDQ2JSAwLjE0IDIxMCk7CiAgZm9udDogNzAwIC44NXJlbS8xLjUgdWktbW9ub3NwYWNlLCBTRk1vbm8tUmVndWxhciwgTWVubG8sIG1vbm9zcGFjZTsKfQo=" code-b64="LyogRmVhdHVyZSBmb2N1czogQ1NTVW5pdFZhbHVlLCBTdHlsZVByb3BlcnR5TWFwICovCi5hcGktcGFuZWwgewogIGJvcmRlci1zdHlsZTogZGFzaGVkOwp9Ci5hcGktbWV0ZXIgewogIGRpc3BsYXk6IGJsb2NrOwogIHBhZGRpbmc6IDEycHg7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDglLCBDYW52YXMpOwogIGNvbG9yOiBva2xjaCg0NiUgMC4xNCAyMTApOwogIGZvbnQ6IDcwMCAuODVyZW0vMS41IHVpLW1vbm9zcGFjZSwgU0ZNb25vLVJlZ3VsYXIsIE1lbmxvLCBtb25vc3BhY2U7Cn0=" html-b64="PGRpdiBjbGFzcz0iZGVtby1jYXJkIGFwaS1wYW5lbCI+CiAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+cnVudGltZSBDU1M8L3NwYW4+CiAgPGg0IGNsYXNzPSJkZW1vLXRpdGxlIj5TdHlsZSBpbnNwZWN0b3I8L2g0PgogIDxwIGNsYXNzPSJkZW1vLWNvcHkiPlRvb2xpbmcgcmVhZHMgc3RydWN0dXJlZCB2YWx1ZXMgd2hpbGUgQ1NTIGtlZXBzIHJlbmRlcmluZyBvd25lcnNoaXAuPC9wPgogIDxjb2RlIGNsYXNzPSJhcGktbWV0ZXIiPndpZHRoOiAzMjBweDwvY29kZT4KPC9kaXY+" caption="API capabilities usually serve tooling or runtime coordination; this inspector scene shows where they fit." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Represent CSS values as typed objects.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use Typed OM in authoring tools and runtime inspection when you need to read or write CSS as structured data when a stylesheet alone cannot express the workflow. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A page builder can inspect selected element geometry, update typed values, and preview a transition without parsing CSS strings.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Do not move presentational styling into JavaScript just because an API exists. Use it when the workflow genuinely needs runtime coordination.</p>
+</section>
+</div>
 
 ## Source metadata
 

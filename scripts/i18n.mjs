@@ -318,11 +318,7 @@ const ui = {
     summary: 'Plain-language explanation',
     syntax: 'Representative syntax',
     demo: 'Demo',
-    demoNote: 'Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix.',
     whenToUse: 'When to use it',
-    useCase: (summary) => `Consider it when you need to solve problems like: ${summary}`,
-    draftNote: 'If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.',
-    supportNote: 'For older target browsers, verify support on MDN and Can I Use before using it in production.',
     source: 'Source metadata',
     category: 'Category',
     status: 'Maturity / source',
@@ -363,11 +359,7 @@ const ui = {
     summary: '简明说明',
     syntax: '代表语法',
     demo: 'Demo 演示',
-    demoNote: '不同浏览器对草案能力的支持差异较大；这里优先展示语法和渐进增强思路，兼容性请以右侧 Can I Use 链接为准。',
     whenToUse: '什么时候用',
-    useCase: (summary) => `当你需要解决「${summary}」这类问题时，可以优先考虑它。`,
-    draftNote: '如果状态里包含“草案”“支持有限”“实现推进中”，建议用 `@supports`、特性检测或保守 fallback。',
-    supportNote: '如果目标用户浏览器较旧，先从 MDN 与 Can I Use 核对支持矩阵，再决定是否进入生产。',
     source: '迁移来源',
     category: '分类',
     status: '成熟度 / 来源',
@@ -420,13 +412,21 @@ export function localizeCategory(category, locale) {
 
 export function localizeItem(item, locale) {
   const slug = itemSlug(item)
-  if (locale === 'zh') return { ...item, slug }
+  if (locale === 'zh') {
+    return {
+      ...item,
+      slug,
+      sourceSlug: item.slug,
+      originalName: item.name
+    }
+  }
 
   const name = englishItemName(item)
   return {
     ...item,
     name,
     slug,
+    sourceSlug: item.slug,
     syntax: syntaxTranslations[item.slug] || item.syntax,
     summary: summaryTranslations[item.slug] || item.summary,
     status: translateStatus(item.status),

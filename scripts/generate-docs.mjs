@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { buildDemo, buildUsage } from './content-enhancements.mjs'
 import { locales, localizeCategory, localizeItem } from './i18n.mjs'
 
 const root = process.cwd()
@@ -23,6 +24,10 @@ function escapeHtml(value) {
 
 function escapeAttr(value) {
   return escapeHtml(value).replace(/"/g, '&quot;')
+}
+
+function encodeBase64(value) {
+  return Buffer.from(String(value), 'utf8').toString('base64')
 }
 
 function oneLine(value) {
@@ -62,8 +67,15 @@ function categoryUrl(locale, category) {
 
 function featurePage(locale, category, item, index, total) {
   const t = locales[locale]
-  const demoCode = escapeAttr(item.demo)
+  const demo = buildDemo(locale, category, item)
+  const usage = buildUsage(locale, category, item)
   const syntax = escapeHtml(item.syntax)
+  const usageCards = usage
+    .map((entry) => `<section>
+  <h3>${escapeHtml(entry.heading)}</h3>
+  <p>${escapeHtml(entry.body)}</p>
+</section>`)
+    .join('\n')
 
   return `# ${item.name}
 
@@ -81,13 +93,13 @@ ${item.syntax}
 
 ## ${t.demo}
 
-<CssDemo title="${escapeAttr(item.name)}" code="${demoCode}" note="${escapeAttr(t.demoNote)}" lang="${escapeAttr(t.lang)}" badge="${escapeAttr(t.liveish)}" />
+<CssDemo title="${escapeAttr(item.name)}" css-b64="${encodeBase64(demo.css)}" code-b64="${encodeBase64(demo.code)}" html-b64="${encodeBase64(demo.html)}" caption="${escapeAttr(demo.caption)}" lang="${escapeAttr(t.lang)}" badge="${escapeAttr(demo.badge)}" />
 
 ## ${t.whenToUse}
 
-- ${t.useCase(oneLine(item.summary))}
-- ${t.draftNote}
-- ${t.supportNote}
+<div class="usage-grid">
+${usageCards}
+</div>
 
 ## ${t.source}
 

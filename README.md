@@ -67,6 +67,7 @@ npm run docs:preview
 |   |-- zh/                     # Generated Simplified Chinese site
 |   `-- index.md                # Generated homepage
 |-- scripts/
+|   |-- content-enhancements.mjs # Practical usage guidance and demo scenes
 |   |-- i18n.mjs                # Locale copy and feature translations
 |   `-- generate-docs.mjs       # Data-to-Markdown generator
 `-- .github/workflows/
@@ -84,7 +85,7 @@ The source of truth is `data/abilities.json`. Each category contains a list of C
 - `status`: maturity or specification status.
 - `mdn`: MDN reference or search entry.
 - `caniuse`: Can I Use compatibility entry or search URL.
-- `demo`: CSS snippet used by the demo component.
+- `demo`: source-era CSS snippet retained as capability metadata.
 
 After editing the data, regenerate the site:
 
@@ -92,7 +93,7 @@ After editing the data, regenerate the site:
 npm run docs:generate
 ```
 
-English display names, summaries, and UI copy live in `scripts/i18n.mjs`. When adding or renaming a capability, update the i18n map so the default English site stays complete.
+English display names, summaries, and UI copy live in `scripts/i18n.mjs`. Practical "When to use it" guidance and demo scenes live in `scripts/content-enhancements.mjs`. When adding or renaming a capability, update both files so the default English site, Chinese site, and practical examples stay complete.
 
 ## Deployment
 

@@ -14,18 +14,24 @@ font-feature-settings, font-variant-*, font-kerning, font-language-override
 
 ## Demo
 
-<CssDemo title="OpenType controls" code=".target {
-  width: 220px;
-  text-wrap: balance;
-  font-size: clamp(18px, 4vw, 34px);
-}
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="OpenType controls" css-b64="LyogRmVhdHVyZSBmb2N1czogZm9udC1mZWF0dXJlLXNldHRpbmdzLCBmb250LXZhcmlhbnQtKiwgZm9udC1rZXJuaW5nLCBmb250LWxhbmd1YWdlLW92ZXJyaWRlICovCi5kZW1vLWZyYW1lIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTZweDsKfQouZGVtby10aXRsZSB7CiAgbWFyZ2luOiAwOwogIGZvbnQtc2l6ZTogMS4zNXJlbTsKICBsaW5lLWhlaWdodDogMS4xOwogIGxldHRlci1zcGFjaW5nOiAwOwp9Ci5kZW1vLWNvcHkgewogIG1hcmdpbjogMDsKICBjb2xvcjogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDcyJSwgQ2FudmFzKTsKICBsaW5lLWhlaWdodDogMS41NTsKfQouZGVtby1jaGlwIHsKICBkaXNwbGF5OiBpbmxpbmUtZmxleDsKICBhbGlnbi1pdGVtczogY2VudGVyOwogIHdpZHRoOiBtYXgtY29udGVudDsKICBtaW4taGVpZ2h0OiAyOHB4OwogIHBhZGRpbmc6IDAgMTBweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTglLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDYlLCBDYW52YXMpOwogIGZvbnQ6IDcwMCAuNzVyZW0vMSB1aS1tb25vc3BhY2UsIFNGTW9uby1SZWd1bGFyLCBNZW5sbywgbW9ub3NwYWNlOwogIHRyYW5zaXRpb246IDIyMG1zIGVhc2U7Cn0KLmRlbW8tY2FyZCB7CiAgZGlzcGxheTogZ3JpZDsKICBnYXA6IDEycHg7CiAgcGFkZGluZzogMThweDsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTYlLCB0cmFuc3BhcmVudCk7CiAgYmFja2dyb3VuZDogY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXMgOTYlLCBDYW52YXNUZXh0KTsKICBib3gtc2hhZG93OiAwIDE4cHggNDhweCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTAlLCB0cmFuc3BhcmVudCk7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1tZWRpYSB7CiAgbWluLWhlaWdodDogOTBweDsKICBiYWNrZ3JvdW5kOgogICAgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBva2xjaCg2NyUgMC4xNSAxOTApIDI2JSwgQ2FudmFzKSwgdHJhbnNwYXJlbnQpLAogICAgcmVwZWF0aW5nLWxpbmVhci1ncmFkaWVudCg0NWRlZywgY29sb3ItbWl4KGluIG9rbGNoLCBDYW52YXNUZXh0IDglLCB0cmFuc3BhcmVudCkgMCA4cHgsIHRyYW5zcGFyZW50IDhweCAxNnB4KTsKICBib3JkZXI6IDFweCBzb2xpZCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgMTIlLCB0cmFuc3BhcmVudCk7Cn0KLmRlbW8tY2FyZCB7CiAgbWF4LWlubGluZS1zaXplOiA1NjBweDsKfQouZGVtby10aXRsZSB7CiAgdGV4dC13cmFwOiBiYWxhbmNlOwp9Ci5kZW1vLWNvcHkgewogIG1heC1pbmxpbmUtc2l6ZTogNDRjaDsKICBoeXBoZW5zOiBhdXRvOwp9Cg==" code-b64="LyogRmVhdHVyZSBmb2N1czogZm9udC1mZWF0dXJlLXNldHRpbmdzLCBmb250LXZhcmlhbnQtKiwgZm9udC1rZXJuaW5nLCBmb250LWxhbmd1YWdlLW92ZXJyaWRlICovCi5kZW1vLWNhcmQgewogIG1heC1pbmxpbmUtc2l6ZTogNTYwcHg7Cn0KLmRlbW8tdGl0bGUgewogIHRleHQtd3JhcDogYmFsYW5jZTsKfQouZGVtby1jb3B5IHsKICBtYXgtaW5saW5lLXNpemU6IDQ0Y2g7CiAgaHlwaGVuczogYXV0bzsKfQ==" html-b64="PGFydGljbGUgY2xhc3M9ImRlbW8tY2FyZCI+CiAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+cmVhZGluZyBzdXJmYWNlPC9zcGFuPgogIDxoNCBjbGFzcz0iZGVtby10aXRsZSI+UmVhbCB0eXBvZ3JhcGh5IHJ1bGVzIGZvciBtdWx0aWxpbmd1YWwgaGVhZGluZ3M8L2g0PgogIDxwIGNsYXNzPSJkZW1vLWNvcHkiPkxvbmcgdGl0bGVzLCBtaXhlZCBzY3JpcHRzLCBhbmQgc3VtbWFyaWVzIHJldmVhbCB0eXBvZ3JhcGh5IHByb2JsZW1zIGluc2lkZSBuYXJyb3cgY2FyZHMuPC9wPgo8L2FydGljbGU+" caption="This example uses realistic heading and summary copy to show how typography features improve a reading surface." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Control ligatures, numbers, East Asian typography, and feature switches.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use OpenType controls in reading and editorial UI when you need to protect readability when copy length, language, or font metrics vary. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A bilingual card can balance the heading, clamp the summary, and keep inline annotations readable in a narrow column.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Always test with real content extremes: long product names, mixed scripts, missing glyphs, and translated copy.</p>
+</section>
+</div>
 
 ## Source metadata
 

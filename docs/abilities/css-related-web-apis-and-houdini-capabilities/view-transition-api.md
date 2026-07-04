@@ -14,15 +14,24 @@ document.startViewTransition(callback)
 
 ## Demo
 
-<CssDemo title="View Transition API" code=".target { animation: pulse 1.8s ease-in-out infinite alternate; }
-@keyframes pulse { to { scale: 1.12; rotate: 3deg; } }
-" note="Support for draft capabilities varies across browsers. This demo focuses on syntax and progressive enhancement; use the Can I Use link for the current compatibility matrix." lang="en-US" badge="Live-ish" />
+<CssDemo title="View Transition API" css-b64="LyogRmVhdHVyZSBmb2N1czogZG9jdW1lbnQuc3RhcnRWaWV3VHJhbnNpdGlvbihjYWxsYmFjaykgKi8KLmRlbW8tZnJhbWUgewogIGRpc3BsYXk6IGdyaWQ7CiAgZ2FwOiAxNnB4Owp9Ci5kZW1vLXRpdGxlIHsKICBtYXJnaW46IDA7CiAgZm9udC1zaXplOiAxLjM1cmVtOwogIGxpbmUtaGVpZ2h0OiAxLjE7CiAgbGV0dGVyLXNwYWNpbmc6IDA7Cn0KLmRlbW8tY29weSB7CiAgbWFyZ2luOiAwOwogIGNvbG9yOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNzIlLCBDYW52YXMpOwogIGxpbmUtaGVpZ2h0OiAxLjU1Owp9Ci5kZW1vLWNoaXAgewogIGRpc3BsYXk6IGlubGluZS1mbGV4OwogIGFsaWduLWl0ZW1zOiBjZW50ZXI7CiAgd2lkdGg6IG1heC1jb250ZW50OwogIG1pbi1oZWlnaHQ6IDI4cHg7CiAgcGFkZGluZzogMCAxMHB4OwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxOCUsIHRyYW5zcGFyZW50KTsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgNiUsIENhbnZhcyk7CiAgZm9udDogNzAwIC43NXJlbS8xIHVpLW1vbm9zcGFjZSwgU0ZNb25vLVJlZ3VsYXIsIE1lbmxvLCBtb25vc3BhY2U7CiAgdHJhbnNpdGlvbjogMjIwbXMgZWFzZTsKfQouZGVtby1jYXJkIHsKICBkaXNwbGF5OiBncmlkOwogIGdhcDogMTJweDsKICBwYWRkaW5nOiAxOHB4OwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxNiUsIHRyYW5zcGFyZW50KTsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhcyA5NiUsIENhbnZhc1RleHQpOwogIGJveC1zaGFkb3c6IDAgMThweCA0OHB4IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxMCUsIHRyYW5zcGFyZW50KTsKICB0cmFuc2l0aW9uOiAyMjBtcyBlYXNlOwp9Ci5kZW1vLW1lZGlhIHsKICBtaW4taGVpZ2h0OiA5MHB4OwogIGJhY2tncm91bmQ6CiAgICBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCBjb2xvci1taXgoaW4gb2tsY2gsIG9rbGNoKDY3JSAwLjE1IDE5MCkgMjYlLCBDYW52YXMpLCB0cmFuc3BhcmVudCksCiAgICByZXBlYXRpbmctbGluZWFyLWdyYWRpZW50KDQ1ZGVnLCBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgOCUsIHRyYW5zcGFyZW50KSAwIDhweCwgdHJhbnNwYXJlbnQgOHB4IDE2cHgpOwogIGJvcmRlcjogMXB4IHNvbGlkIGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCAxMiUsIHRyYW5zcGFyZW50KTsKfQouYXBpLXBhbmVsIHsKICBib3JkZXItc3R5bGU6IGRhc2hlZDsKfQouYXBpLW1ldGVyIHsKICBkaXNwbGF5OiBibG9jazsKICBwYWRkaW5nOiAxMnB4OwogIGJhY2tncm91bmQ6IGNvbG9yLW1peChpbiBva2xjaCwgQ2FudmFzVGV4dCA4JSwgQ2FudmFzKTsKICBjb2xvcjogb2tsY2goNDYlIDAuMTQgMjEwKTsKICBmb250OiA3MDAgLjg1cmVtLzEuNSB1aS1tb25vc3BhY2UsIFNGTW9uby1SZWd1bGFyLCBNZW5sbywgbW9ub3NwYWNlOwp9Cg==" code-b64="LyogRmVhdHVyZSBmb2N1czogZG9jdW1lbnQuc3RhcnRWaWV3VHJhbnNpdGlvbihjYWxsYmFjaykgKi8KLmFwaS1wYW5lbCB7CiAgYm9yZGVyLXN0eWxlOiBkYXNoZWQ7Cn0KLmFwaS1tZXRlciB7CiAgZGlzcGxheTogYmxvY2s7CiAgcGFkZGluZzogMTJweDsKICBiYWNrZ3JvdW5kOiBjb2xvci1taXgoaW4gb2tsY2gsIENhbnZhc1RleHQgOCUsIENhbnZhcyk7CiAgY29sb3I6IG9rbGNoKDQ2JSAwLjE0IDIxMCk7CiAgZm9udDogNzAwIC44NXJlbS8xLjUgdWktbW9ub3NwYWNlLCBTRk1vbm8tUmVndWxhciwgTWVubG8sIG1vbm9zcGFjZTsKfQ==" html-b64="PGRpdiBjbGFzcz0iZGVtby1jYXJkIGFwaS1wYW5lbCI+CiAgPHNwYW4gY2xhc3M9ImRlbW8tY2hpcCI+cnVudGltZSBDU1M8L3NwYW4+CiAgPGg0IGNsYXNzPSJkZW1vLXRpdGxlIj5TdHlsZSBpbnNwZWN0b3I8L2g0PgogIDxwIGNsYXNzPSJkZW1vLWNvcHkiPlRvb2xpbmcgcmVhZHMgc3RydWN0dXJlZCB2YWx1ZXMgd2hpbGUgQ1NTIGtlZXBzIHJlbmRlcmluZyBvd25lcnNoaXAuPC9wPgogIDxjb2RlIGNsYXNzPSJhcGktbWV0ZXIiPndpZHRoOiAzMjBweDwvY29kZT4KPC9kaXY+" caption="API capabilities usually serve tooling or runtime coordination; this inspector scene shows where they fit." lang="en-US" badge="Practical demo" />
 
 ## When to use it
 
-- Consider it when you need to solve problems like: Work with CSS view-transition pseudo-elements from JavaScript.
-- If the status includes draft, limited support, or implementation in progress, use @supports, feature detection, or conservative fallbacks.
-- For older target browsers, verify support on MDN and Can I Use before using it in production.
+<div class="usage-grid">
+<section>
+  <h3>Best fit</h3>
+  <p>Use View Transition API in interaction feedback when you need to make a state change legible through movement, timing, or continuity. It usually gives the stylesheet a clearer job than extra classes, wrappers, or script.</p>
+</section>
+<section>
+  <h3>Example</h3>
+  <p>A selected card can lift, move, or cross-fade into a detail view so the user understands the relationship between states.</p>
+</section>
+<section>
+  <h3>Watch out</h3>
+  <p>Motion should be optional and purposeful. Add a reduced-motion path before the interaction becomes central to navigation.</p>
+</section>
+</div>
 
 ## Source metadata
 
